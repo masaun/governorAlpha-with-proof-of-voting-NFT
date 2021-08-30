@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "accounts": "npx hardhat accounts",
-    "test": "npx hardhat test",
+    "accounts": "npx hardhat accounts --network hardhat",
+    "test": "npx hardhat test --network hardhat",
     "compile": "npx hardhat compile",
     "node": "npx hardhat node",
     "scripts/sample-script.js": "node scripts/sample-script.js"
   },
   "keywords": [],
-  "author": "Dennison Bertram <dennison@dennisonbertram.com>",
   "license": "MIT",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
