@@ -1,6 +1,6 @@
 /**
- *Submitted for verification at Etherscan.io on 2019-10-11
-*/
+ * Submitted for verification at Etherscan.io on 2019-10-11
+ */
 
 // File: contracts/SafeMath.sol
 

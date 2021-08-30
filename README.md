@@ -1,3 +1,17 @@
+# 【Compound Governance Voting with NFT】
+- This is the smart contract that is combination of Voting and NFT.
+  - Once a token holder execute voting, he/she receive a NFT as a proof of voting.
+
+  - As a incentive for engagement of voting, token holders who has voting NFTs can get rewards regularly.
+
+  - Current disadvantage of on-chain voting (especially for small share holders) is that:
+    - token holders need to pay GasFee⛽️ for every voting.
+    - small share holder has less voting power than large share holders.
+
+<br>
+
+<hr>
+
 TL:DR
 
 Want governance now? Clone the [github](https://github.com/withtally/Tutorial-Deploy-Governance) project, install the dependencies, add your Infura API and private key to the config and type `npx hardhat deploy`

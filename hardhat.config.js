@@ -35,12 +35,35 @@ task("Deploy", "Deploys a COMPound style governance system")
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
+  defaultNetwork: "hardhat",
   networks: {
-    rinkeby: {
-      url: "https://rinkeby.infura.io/v3/<<Your infura Key>>",
-      accounts: ["0xAPrivateKey"]
-    }
+    hardhat: {
+      // See its defaults
+    },
+    local: {
+      url: "http://127.0.0.1:8545"
+    },
+    // rinkeby: {
+    //   url: "https://rinkeby.infura.io/v3/<<Your infura Key>>",
+    //   accounts: ["0xAPrivateKey"]
+    // }
   },
-  solidity: "0.5.16",
+  solidity: {
+    compilers: [
+      {
+        version: "0.5.16",
+        settings: {},
+      },
+      // {
+      //   version: "0.8.4",
+      //   settings: {},
+      // },
+      // {
+      //   version: "0.8.6",
+      //   settings: {},
+      // }
+    ],
+  },  
+
 };
 
