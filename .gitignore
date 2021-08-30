@@ -1,0 +1,11 @@
+# node modules
+node_modules
+package-lock.json
+
+#Hardhat files
+cache
+artifacts
+
+# others
+.env
+.DS_store
