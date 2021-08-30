@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "accounts": "npx hardhat accounts",
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "node": "npx hardhat node",
+    "scripts/sample-script.js": "node scripts/sample-script.js"
   },
   "keywords": [],
   "author": "Dennison Bertram <dennison@dennisonbertram.com>",
