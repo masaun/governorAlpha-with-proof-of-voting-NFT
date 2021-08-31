@@ -18,6 +18,7 @@
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.6",
-    "hardhat": "^2.6.1"
+    "hardhat": "^2.6.1",
+    "bignumber.js": "9.0.0"
   }
 }
