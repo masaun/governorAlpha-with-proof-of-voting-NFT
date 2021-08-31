@@ -7,6 +7,7 @@
     "accounts": "npx hardhat accounts --network hardhat",
     "test": "npx hardhat test --network hardhat",
     "compile": "npx hardhat compile",
+    "deploy": "npx hardhat run scripts/Deploy.js",
     "node": "npx hardhat node",
     "scripts/sample-script.js": "node scripts/sample-script.js"
   },
