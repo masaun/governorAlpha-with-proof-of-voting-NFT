@@ -15,15 +15,15 @@ const solparse = require('solparse');
 const governorAlphaPath = path.join(__dirname, '../../../..', 'contracts', 'compound/Governance/GovernorAlpha.sol');
 //const governorAlphaPath = path.join(__dirname, '../../..', 'contracts', 'Governance/GovernorAlpha.sol');
 
-const statesInverted = solparse
-  .parseFile(governorAlphaPath)
-  .body
-  .find(k => k.type === 'ContractStatement')
-  .body
-  .find(k => k.name == 'ProposalState')
-  .members
+// const statesInverted = solparse
+//   .parseFile(governorAlphaPath)
+//   .body
+//   .find(k => k.type === 'ContractStatement')
+//   .body
+//   .find(k => k.name == 'ProposalState')
+//   .members
 
-const states = Object.entries(statesInverted).reduce((obj, [key, value]) => ({ ...obj, [value]: key }), {});
+// const states = Object.entries(statesInverted).reduce((obj, [key, value]) => ({ ...obj, [value]: key }), {});
 
 describe('GovernorAlpha#state/1', () => {
   let comp, gov, root, acct, delay, timelock;
