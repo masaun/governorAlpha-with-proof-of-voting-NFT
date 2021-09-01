@@ -26,7 +26,8 @@ const states = Object.entries(statesInverted).reduce((obj, [key, value]) => ({ .
 describe('GovernorBravo#state/1', () => {
   let comp, gov, root, acct, delay, timelock;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
+  //beforeAll(async () => {
     await freezeTime(100);
     [root, acct, ...accounts] = accounts;
     comp = await deploy('Comp', [root]);
@@ -40,7 +41,8 @@ describe('GovernorBravo#state/1', () => {
   });
 
   let trivialProposal, targets, values, signatures, callDatas;
-  beforeAll(async () => {
+  beforeEach(async () => {
+  //beforeAll(async () => {
     targets = [root];
     values = ["0"];
     signatures = ["getBalanceOf(address)"]

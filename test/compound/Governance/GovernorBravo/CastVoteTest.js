@@ -19,7 +19,8 @@ describe("governorBravo#castVote/2", () => {
   let comp, gov, root, a1, accounts, govDelegate;
   let targets, values, signatures, callDatas, proposalId;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
+  //beforeAll(async () => {
     [root, a1, ...accounts] = saddle.accounts;
     comp = await deploy('Comp', [root]);
     govDelegate = await deploy('GovernorBravoDelegateHarness');
