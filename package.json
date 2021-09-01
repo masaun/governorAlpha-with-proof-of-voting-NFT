@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "accounts": "npx hardhat accounts --network hardhat",
-    "test": "npx hardhat test --network hardhat",
+    "test": "./node_modules/.bin/hardhat test ./test/* --network hardhat",
     "compile": "npx hardhat compile",
     "deploy": "npx hardhat run scripts/Deploy.js",
     "node": "npx hardhat node",
@@ -20,6 +20,7 @@
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.6",
     "hardhat": "^2.6.1",
-    "bignumber.js": "9.0.0"
+    "bignumber.js": "9.0.0",
+    "dotenv": "^8.2.0"    
   }
 }
