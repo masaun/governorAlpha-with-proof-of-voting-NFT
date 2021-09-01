@@ -14,15 +14,16 @@ const solparse = require('solparse');
 
 const governorBravoPath = path.join(__dirname, '../../../..', 'contracts', 'compound/Governance/GovernorAlpha.sol');
 //const governorBravoPath = path.join(__dirname, '../../..', 'contracts', 'Governance/GovernorBravoInterfaces.sol');
-const statesInverted = solparse
-  .parseFile(governorBravoPath)
-  .body
-  .find(k => k.name === 'GovernorBravoDelegateStorageV1')
-  .body
-  .find(k => k.name == 'ProposalState')
-  .members
 
-const states = Object.entries(statesInverted).reduce((obj, [key, value]) => ({ ...obj, [value]: key }), {});
+// const statesInverted = solparse
+//   .parseFile(governorBravoPath)
+//   .body
+//   .find(k => k.name === 'GovernorBravoDelegateStorageV1')
+//   .body
+//   .find(k => k.name == 'ProposalState')
+//   .members
+
+// const states = Object.entries(statesInverted).reduce((obj, [key, value]) => ({ ...obj, [value]: key }), {});
 
 describe('GovernorBravo#state/1', () => {
   let comp, gov, root, acct, delay, timelock;
