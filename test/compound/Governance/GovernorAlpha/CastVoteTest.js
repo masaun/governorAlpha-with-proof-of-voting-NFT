@@ -18,8 +18,6 @@ describe("governorAlpha#castVote/2", () => {
   let comp, gov, root, a1, accounts;
   let targets, values, signatures, callDatas, proposalId;
 
-  console.log('=== Check log ===')
-
   beforeEach(async () => {
   //beforeAll(async () => {
     [root, a1, ...accounts] = saddle.accounts;
