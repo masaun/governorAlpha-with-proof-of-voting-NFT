@@ -14,7 +14,9 @@ async function enfranchise(comp, actor, amount) {
 
 describe('GovernorAlpha#queue/1', () => {
   let root, a1, a2, accounts;
-  beforeAll(async () => {
+
+  beforeEach(async () => {
+  //beforeAll(async () => {
     [root, a1, a2, ...accounts] = saddle.accounts;
   });
 

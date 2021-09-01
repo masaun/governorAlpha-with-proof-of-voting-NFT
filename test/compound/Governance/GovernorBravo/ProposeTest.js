@@ -8,7 +8,8 @@ const {
 describe('GovernorBravo#propose/5', () => {
   let gov, root, acct;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
+  //beforeAll(async () => {
     [root, acct, ...accounts] = accounts;
     comp = await deploy('Comp', [root]);
     gov = await deploy('GovernorBravoImmutable', [address(0), comp._address, root, 17280, 1, "100000000000000000000000"]);
@@ -17,7 +18,9 @@ describe('GovernorBravo#propose/5', () => {
 
   let trivialProposal, targets, values, signatures, callDatas;
   let proposalBlock;
-  beforeAll(async () => {
+
+  beforeEach(async () => {  
+  //beforeAll(async () => {
     targets = [root];
     values = ["0"];
     signatures = ["getBalanceOf(address)"];

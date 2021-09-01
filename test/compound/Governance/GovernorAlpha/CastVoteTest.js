@@ -20,7 +20,8 @@ describe("governorAlpha#castVote/2", () => {
 
   console.log('=== Check log ===')
 
-  beforeAll(async () => {
+  beforeEach(async () => {
+  //beforeAll(async () => {
     [root, a1, ...accounts] = saddle.accounts;
     comp = await deploy('Comp', [root]);
     gov = await deploy('GovernorAlpha', [address(0), comp._address, root]);
