@@ -12,7 +12,8 @@ const {
 const path = require('path');
 const solparse = require('solparse');
 
-const governorAlphaPath = path.join(__dirname, '../../..', 'contracts', 'Governance/GovernorAlpha.sol');
+const governorAlphaPath = path.join(__dirname, '../../../..', 'contracts', 'compound/Governance/GovernorAlpha.sol');
+//const governorAlphaPath = path.join(__dirname, '../../..', 'contracts', 'Governance/GovernorAlpha.sol');
 
 const statesInverted = solparse
   .parseFile(governorAlphaPath)
