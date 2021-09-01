@@ -3,7 +3,8 @@ const {
   etherMantissa,
   encodeParameters,
   mineBlock,
-  unlockedAccount
+  unlockedAccount,
+  mergeInterface
 } = require('../../Utils/Ethereum');
 const EIP712 = require('../../Utils/EIP712');
 const BigNumber = require('bignumber.js');
@@ -14,17 +15,19 @@ async function enfranchise(comp, actor, amount) {
   await send(comp, 'delegate', [actor], { from: actor });
 }
 
-describe("governorAlpha#castVote/2", () => {
-  let comp, gov, root, a1, accounts;
+describe("governorBravo#castVote/2", () => {
+  let comp, gov, root, a1, accounts, govDelegate;
   let targets, values, signatures, callDatas, proposalId;
-
-  console.log('=== Check log ===')
 
   beforeAll(async () => {
     [root, a1, ...accounts] = saddle.accounts;
     comp = await deploy('Comp', [root]);
-    gov = await deploy('GovernorAlpha', [address(0), comp._address, root]);
-
+    govDelegate = await deploy('GovernorBravoDelegateHarness');
+    gov = await deploy('GovernorBravoDelegator', [address(0), comp._address, root, govDelegate._address, 17280, 1, "100000000000000000000000"]);
+    mergeInterface(gov,govDelegate);
+    await send(gov, '_initiate');
+    
+    
     targets = [a1];
     values = ["0"];
     signatures = ["getBalanceOf(address)"];
@@ -37,25 +40,28 @@ describe("governorAlpha#castVote/2", () => {
   describe("We must revert if:", () => {
     it("There does not exist a proposal with matching proposal id where the current block number is between the proposal's start block (exclusive) and end block (inclusive)", async () => {
       await expect(
-        call(gov, 'castVote', [proposalId, true])
-      ).rejects.toRevert("revert GovernorAlpha::_castVote: voting is closed");
+        call(gov, 'castVote', [proposalId, 1])
+      ).rejects.toRevert("revert GovernorBravo::castVoteInternal: voting is closed");
     });
 
     it("Such proposal already has an entry in its voters set matching the sender", async () => {
       await mineBlock();
       await mineBlock();
 
-      await send(gov, 'castVote', [proposalId, true], { from: accounts[4] });
+      let vote = await send(gov, 'castVote', [proposalId, 1], { from: accounts[4] });
+
+      let vote2 = await send(gov, 'castVoteWithReason', [proposalId, 1, ""], { from: accounts[3] });
+
       await expect(
-        gov.methods['castVote'](proposalId, true).call({ from: accounts[4] })
-      ).rejects.toRevert("revert GovernorAlpha::_castVote: voter already voted");
+        gov.methods['castVote'](proposalId, 1).call({ from: accounts[4] })
+      ).rejects.toRevert("revert GovernorBravo::castVoteInternal: voter already voted");
     });
   });
 
   describe("Otherwise", () => {
     it("we add the sender to the proposal's voters set", async () => {
       await expect(call(gov, 'getReceipt', [proposalId, accounts[2]])).resolves.toPartEqual({hasVoted: false});
-      await send(gov, 'castVote', [proposalId, true], { from: accounts[2] });
+      let vote = await send(gov, 'castVote', [proposalId, 1], { from: accounts[2] });
       await expect(call(gov, 'getReceipt', [proposalId, accounts[2]])).resolves.toPartEqual({hasVoted: true});
     });
 
@@ -71,7 +77,7 @@ describe("governorAlpha#castVote/2", () => {
 
         let beforeFors = (await call(gov, 'proposals', [proposalId])).forVotes;
         await mineBlock();
-        await send(gov, 'castVote', [proposalId, true], { from: actor });
+        await send(gov, 'castVote', [proposalId, 1], { from: actor });
 
         let afterFors = (await call(gov, 'proposals', [proposalId])).forVotes;
         expect(new BigNumber(afterFors)).toEqual(new BigNumber(beforeFors).plus(etherMantissa(400001)));
@@ -86,7 +92,7 @@ describe("governorAlpha#castVote/2", () => {
 
         let beforeAgainsts = (await call(gov, 'proposals', [proposalId])).againstVotes;
         await mineBlock();
-        await send(gov, 'castVote', [proposalId, false], { from: actor });
+        await send(gov, 'castVote', [proposalId, 0], { from: actor });
 
         let afterAgainsts = (await call(gov, 'proposals', [proposalId])).againstVotes;
         expect(new BigNumber(afterAgainsts)).toEqual(new BigNumber(beforeAgainsts).plus(etherMantissa(400001)));
@@ -95,19 +101,19 @@ describe("governorAlpha#castVote/2", () => {
 
     describe('castVoteBySig', () => {
       const Domain = (gov) => ({
-        name: 'Compound Governor Alpha',
+        name: 'Compound Governor Bravo',
         chainId: 1, // await web3.eth.net.getId(); See: https://github.com/trufflesuite/ganache-core/issues/515
         verifyingContract: gov._address
       });
       const Types = {
         Ballot: [
           { name: 'proposalId', type: 'uint256' },
-          { name: 'support', type: 'bool' }
+          { name: 'support', type: 'uint8' },
         ]
       };
 
       it('reverts if the signatory is invalid', async () => {
-        await expect(send(gov, 'castVoteBySig', [proposalId, false, 0, '0xbad', '0xbad'])).rejects.toRevert("revert GovernorAlpha::castVoteBySig: invalid signature");
+        await expect(send(gov, 'castVoteBySig', [proposalId, 0, 0, '0xbad', '0xbad'])).rejects.toRevert("revert GovernorBravo::castVoteBySig: invalid signature");
       });
 
       it('casts vote on behalf of the signatory', async () => {
@@ -115,11 +121,11 @@ describe("governorAlpha#castVote/2", () => {
         await send(gov, 'propose', [targets, values, signatures, callDatas, "do nothing"], { from: a1 });
         proposalId = await call(gov, 'latestProposalIds', [a1]);;
 
-        const { v, r, s } = EIP712.sign(Domain(gov), 'Ballot', { proposalId, support: true }, Types, unlockedAccount(a1).secretKey);
+        const { v, r, s } = EIP712.sign(Domain(gov), 'Ballot', { proposalId, support: 1 }, Types, unlockedAccount(a1).secretKey);
 
         let beforeFors = (await call(gov, 'proposals', [proposalId])).forVotes;
         await mineBlock();
-        const tx = await send(gov, 'castVoteBySig', [proposalId, true, v, r, s]);
+        const tx = await send(gov, 'castVoteBySig', [proposalId, 1, v, r, s]);
         expect(tx.gasUsed < 80000);
 
         let afterFors = (await call(gov, 'proposals', [proposalId])).forVotes;
@@ -127,7 +133,7 @@ describe("governorAlpha#castVote/2", () => {
       });
     });
 
-    it("receipt uses one load", async () => {
+     it("receipt uses two loads", async () => {
       let actor = accounts[2];
       let actor2 = accounts[3];
       await enfranchise(comp, actor, 400001);
@@ -137,11 +143,13 @@ describe("governorAlpha#castVote/2", () => {
 
       await mineBlock();
       await mineBlock();
-      await send(gov, 'castVote', [proposalId, true], { from: actor });
-      await send(gov, 'castVote', [proposalId, false], { from: actor2 });
+      await send(gov, 'castVote', [proposalId, 1], { from: actor });
+      await send(gov, 'castVote', [proposalId, 0], { from: actor2 });
 
       let trxReceipt = await send(gov, 'getReceipt', [proposalId, actor]);
       let trxReceipt2 = await send(gov, 'getReceipt', [proposalId, actor2]);
+
+      let govDelegateAddress = '000000000000000000000000' + govDelegate._address.toString().toLowerCase().substring(2);
 
       await saddle.trace(trxReceipt, {
         constants: {
@@ -155,12 +163,19 @@ describe("governorAlpha#castVote/2", () => {
           let voted = "01";
           let support = "01";
 
-          expect(output).toEqual(
-            `${votes}${support}${voted}`
-          );
+          if(log.depth == 0) {
+            expect(output).toEqual(
+              `${govDelegateAddress}`
+            );
+          }
+          else {
+            expect(output).toEqual(
+              `${votes}${support}${voted}`
+            );
+          }
         },
         exec: (logs) => {
-          expect(logs.length).toEqual(1); // require only one read
+          expect(logs[logs.length - 1]["depth"]).toEqual(1); // last log is depth 1 (two SLOADS)
         }
       });
 
@@ -176,9 +191,19 @@ describe("governorAlpha#castVote/2", () => {
           let voted = "01";
           let support = "00";
 
-          expect(output).toEqual(
-            `${votes}${support}${voted}`
-          );
+          if(log.depth == 0) {
+            expect(output).toEqual(
+              `${govDelegateAddress}`
+            );
+          }
+          else {
+            expect(output).toEqual(
+              `${votes}${support}${voted}`
+            );
+          }
+        },
+        exec: (logs) => {
+          expect(logs[logs.length - 1]["depth"]).toEqual(1); // last log is depth 1 (two SLOADS)
         }
       });
     });
