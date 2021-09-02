@@ -29,8 +29,18 @@ describe("governorAlpha#castVote/2", () => {
 
     console.log('=== root, a1 ===', root, a1)
 
-    comp = await deploy('Comp', [root]);
-    gov = await deploy('GovernorAlpha', [address(0), comp._address, root]);
+    /// [Todo]: Deploy
+    Comp = await ethers.getContractFactory("Comp");
+    comp = await Comp.deploy(root);
+
+    GovernorAlpha = await ethers.getContractFactory("GovernorAlpha");
+    gov = await GovernorAlpha.deploy(root, comp.address, root);
+
+    //comp = await deploy('Comp', [root]);
+    //gov = await deploy('GovernorAlpha', [address(0), comp._address, root]);
+
+
+
 
     targets = [a1];
     values = ["0"];
