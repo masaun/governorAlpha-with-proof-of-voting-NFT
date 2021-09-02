@@ -23,9 +23,10 @@ describe("Comp", function() {
     })
 
     it("Should return the Comp balance", async function() {
-        let compBalance = await comp.balanceOf(deployer)
-        console.log('=== Comp balance of deployer ===',  ethers.utils.formatEther(String(compBalance))) // fromETH
-        expect(ethers.utils.formatEther(String(compBalance))).to.equal("10000000.0")  /// 10,000,000 COMP
+        let _compBalance = await comp.balanceOf(deployer)
+        let compBalance = ethers.utils.formatEther(String(_compBalance))
+        console.log('=== Comp balance of deployer ===',  compBalance) // fromETH
+        expect(compBalance).to.equal("10000000.0")  /// 10,000,000 COMP
     })
 
     it("Should return the Comp balance", async function() {
