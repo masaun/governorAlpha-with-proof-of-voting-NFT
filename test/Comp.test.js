@@ -1,4 +1,4 @@
-const { expect } = require("chai");
+const { expect } = require("chai")
 
 describe("Comp", function() {
 
@@ -10,7 +10,7 @@ describe("Comp", function() {
     let Comp, comp
 
     it("Assign accounts", async function() {
-        accounts = await hre.ethers.getSigners();
+        accounts = await hre.ethers.getSigners()
         deployer = accounts[0].address
         user1 = accounts[1].address
     })
@@ -18,13 +18,14 @@ describe("Comp", function() {
     it("Deploy the Comp.sol", async function() {
         const account = deployer
 
-        Comp = await ethers.getContractFactory("Comp");
-        comp = await Comp.deploy(account);    
+        Comp = await ethers.getContractFactory("Comp")
+        comp = await Comp.deploy(account)    
     })
 
     it("Should return the Comp balance", async function() {
         let compBalance = await comp.balanceOf(deployer)
         console.log('=== Comp balance of deployer ===',  ethers.utils.formatEther(String(compBalance))) // fromETH
+        expect(ethers.utils.formatEther(String(compBalance))).to.equal("10000000.0")  /// 10,000,000 COMP
     })
 
     it("Should return the Comp balance", async function() {
