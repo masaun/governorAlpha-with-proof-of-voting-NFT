@@ -39,4 +39,18 @@ describe("Scenario test", function() {
         console.log('=== txReceipt of comp.transfer() ===', txReceipt2)
     })
 
+
+    ///-----------------------------------------
+    /// General process (propose - cast voting)
+    ///-----------------------------------------
+    it("Propose a proposal", async function() {})
+
+    it("Cast voting and distribute NFTs into voters (wallets)", async function() {})
+
+
+    ///---------------------------------
+    ///  Rewards distribution process
+    ///---------------------------------
+    it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has ", async function() {})
+
 })
