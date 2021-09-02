@@ -7,6 +7,12 @@ function UInt256Max() {
   return ethers.constants.MaxUint256;
 }
 
+// Added
+// function deploy(contractName) {
+//   await ethers.getContractFactory(contractName);
+//   await Greeter.deploy("Hello, Hardhat!");
+// }
+
 function address(n) {
   return `0x${n.toString(16).padStart(40, '0')}`;
 }
