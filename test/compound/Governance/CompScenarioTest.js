@@ -4,7 +4,11 @@ describe('CompScenario', () => {
   let comp;
 
   beforeEach(async () => {
-    [root, ...accounts] = saddle.accounts;
+    const accounts = await hre.ethers.getSigners();
+
+    root = accounts[0].address
+    //[root, ...accounts] = saddle.accounts;
+    
     comp = await deploy('CompScenario', [root]);
   });
 

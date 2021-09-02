@@ -20,7 +20,15 @@ describe("governorAlpha#castVote/2", () => {
 
   beforeEach(async () => {
   //beforeAll(async () => {
-    [root, a1, ...accounts] = saddle.accounts;
+
+    const accounts = await hre.ethers.getSigners();
+
+    root = accounts[0].address
+    a1 = accounts[1].address
+    //[root, a1, ...accounts] = saddle.accounts;
+
+    console.log('=== root, a1 ===', root, a1)
+
     comp = await deploy('Comp', [root]);
     gov = await deploy('GovernorAlpha', [address(0), comp._address, root]);
 
