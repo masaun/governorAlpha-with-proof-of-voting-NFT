@@ -14,12 +14,12 @@ contract ProofOfVotingNFTFactory {
 
     constructor() public {}
 
-    function createNewProofOfVotingNFT() public returns (bool) {
+    function createNewProofOfVotingNFT(address voter) public returns (bool) {
         ProofOfVotingNFT proofOfVotingNFT = new ProofOfVotingNFT();
 
         address PROOF_OF_VOTING_NFT = address(proofOfVotingNFT);
         proofOfVotingNFTAddresses.push(PROOF_OF_VOTING_NFT);
-        nftOwners[PROOF_OF_VOTING_NFT] = msg.sender;
+        nftOwners[PROOF_OF_VOTING_NFT] = voter;
     }
 
 
@@ -44,5 +44,13 @@ contract ProofOfVotingNFTFactory {
         return countOfProofOfVotingNFTs;
     }
 
+
+    //-----------------
+    // Getter methods
+    //-----------------
+
+    function getLatestProofOfVotingNFTAddress() public view returns (address _latestProofOfVotingNFTAddress) {
+        return proofOfVotingNFTAddresses[proofOfVotingNFTAddresses.length - 1];
+    }
 
 }

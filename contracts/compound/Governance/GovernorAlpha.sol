@@ -5,6 +5,10 @@
 pragma solidity ^0.5.16;
 pragma experimental ABIEncoderV2;
 
+import { ProofOfVotingNFT } from "../../ProofOfVotingNFT.sol";
+import { ProofOfVotingNFTFactory } from "../../ProofOfVotingNFTFactory.sol";
+
+
 contract GovernorAlpha {
     /// @notice The name of this contract
     string public constant name = "Compound Governor Alpha";
@@ -29,6 +33,9 @@ contract GovernorAlpha {
 
     /// @notice The address of the Compound governance token
     CompInterface public comp;
+
+    /// @notice The address of the ProofOfVotingNFTFactory contract
+    ProofOfVotingNFTFactory public proofOfVotingNFTFactory;
 
     /// @notice The address of the Governor Guardian
     address public guardian;
@@ -131,10 +138,11 @@ contract GovernorAlpha {
     /// @notice An event emitted when a proposal has been executed in the Timelock
     event ProposalExecuted(uint id);
 
-    constructor(address timelock_, address comp_, address guardian_) public {
+    constructor(address timelock_, address comp_, address guardian_, address proofOfVotingNFTFactory_) public {
         timelock = TimelockInterface(timelock_);
         comp = CompInterface(comp_);
         guardian = guardian_;
+        proofOfVotingNFTFactory = ProofOfVotingNFTFactory(proofOfVotingNFTFactory_);
     }
 
     function propose(address[] memory targets, uint[] memory values, string[] memory signatures, bytes[] memory calldatas, string memory description) public returns (uint) {
@@ -278,6 +286,12 @@ contract GovernorAlpha {
         receipt.hasVoted = true;
         receipt.support = support;
         receipt.votes = votes;
+
+        // [Note]: Mint a proof of voting NFT into a voter's wallet 
+        proofOfVotingNFTFactory.createNewProofOfVotingNFT(msg.sender);
+        address latestProofOfVotingNFTAddress = proofOfVotingNFTFactory.getLatestProofOfVotingNFTAddress();
+        ProofOfVotingNFT proofOfVotingNFT = ProofOfVotingNFT(latestProofOfVotingNFTAddress);
+        proofOfVotingNFT.mintProofOfVotingNFTs(voter);
 
         emit VoteCast(voter, proposalId, support, votes);
     }
