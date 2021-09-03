@@ -10,12 +10,25 @@ import { ProofOfVotingNFT } from "./ProofOfVotingNFT.sol";
 contract ProofOfVotingNFTFactory {
 
     address[] public proofOfVotingNFTAddresses;
+    mapping (address => address) nftOwners;
 
     constructor() public {}
 
     function createNewProofOfVotingNFT() public returns (bool) {
         ProofOfVotingNFT proofOfVotingNFT = new ProofOfVotingNFT();
-        proofOfVotingNFTAddresses.push(address(proofOfVotingNFT));
+
+        address PROOF_OF_VOTING_NFT = address(proofOfVotingNFT);
+        proofOfVotingNFTAddresses.push(PROOF_OF_VOTING_NFT);
+        nftOwners[PROOF_OF_VOTING_NFT] = msg.sender;
     }
+
+
+    //----------------
+    // Getter methods
+    //----------------
+    function getCountOfProofOfVotingNFTs(address voter) public view returns (uint _proofOfVotingNFTs) {
+        // [Todo]: Return number of NFTs which voter has
+    }
+
 
 }

@@ -13,10 +13,6 @@ contract ProofOfVotingNFT is ERC721Full {
 
     constructor() ERC721Full("Proof of voting NFT", "POV") public {}
 
-    function getCountOfProofOfVotingNFTs(address voter) public view returns (uint _proofOfVotingNFTs) {
-        // [Todo]: Return number of NFTs which voter has
-    }
-
     function mintProofOfVotingNFTs(address voter) public returns (uint256) {
         _tokenIds.increment();
 
