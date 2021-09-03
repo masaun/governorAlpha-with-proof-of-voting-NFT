@@ -16,7 +16,7 @@ describe("Scenario test", function() {
 
     /// Accounts
     let accounts
-    let guardian, deployer, user1, user2, user3
+    let guardian, deployer, voter1, voter2, voter3
 
     /// Contract instance
     let Timelock, timelock, TIMELOCK
@@ -28,7 +28,7 @@ describe("Scenario test", function() {
             accounts = await hre.ethers.getSigners()
             guardian = accounts[0].address
             deployer = accounts[0].address
-            user1 = accounts[1].address
+            voter1 = accounts[1].address
         })
 
         it("Deploy the Timelock.sol", async function() {
@@ -71,7 +71,7 @@ describe("Scenario test", function() {
         })
 
         it("Should return the Comp balance", async function() {
-            const dst = user1
+            const dst = voter1
             const rawAmount = ethers.utils.parseEther('2000')  /// 2000 COMP
             let txReceipt2 = await comp.transfer(dst, rawAmount)
             console.log('=== txReceipt of comp.transfer() ===', txReceipt2)
@@ -83,7 +83,9 @@ describe("Scenario test", function() {
     /// General process (propose - cast voting)
     ///-----------------------------------------
     describe("General process (propose - cast voting)", function() {
-        it("Propose a proposal", async function() {})
+        it("Propose a proposal", async function() {
+
+        })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {})
     })

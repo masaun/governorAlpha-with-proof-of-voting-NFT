@@ -10,6 +10,19 @@
 
 <br>
 
+### _[Unit test]_
+- Scenario test
+```
+npm run test:Scenario.test.js
+```
+
+- Test of Comp.sol
+```
+npm run test:Comp.test.js
+```
+
+<br>
+
 <hr>
 
 TL:DR
