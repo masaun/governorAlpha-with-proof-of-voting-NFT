@@ -14,6 +14,7 @@
   "keywords": [],
   "license": "MIT",
   "devDependencies": {
+    "@openzeppelin/contracts": "^2.5.1",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "bignumber.js": "9.0.0",
@@ -21,7 +22,6 @@
     "dotenv": "^8.2.0",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.6",
-    "hardhat": "^2.6.1",
-    "solparse": "^2.2.8"
+    "hardhat": "^2.6.1"
   }
 }

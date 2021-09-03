@@ -7,7 +7,7 @@ describe("Scenario test", function() {
 
     /// Accounts
     let accounts
-    let deployer
+    let deployer, user1, user2, user3
 
     /// Contract instance
     let Comp, comp
