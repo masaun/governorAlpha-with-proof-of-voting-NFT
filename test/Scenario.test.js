@@ -30,7 +30,8 @@ describe("Scenario test", function() {
 
     it("Deploy the Timelock.sol", async function() {
         const admin = deployer
-        const delay = oneWeekInSeconds
+        const delay = String(oneWeekInSeconds)
+        console.log('=== delay ===', delay)
 
         Timelock = await ethers.getContractFactory("Timelock")
         timelock = await Timelock.deploy(admin, delay)    
