@@ -10,7 +10,7 @@ import { ProofOfVotingNFT } from "./ProofOfVotingNFT.sol";
 contract ProofOfVotingNFTFactory {
 
     address[] public proofOfVotingNFTAddresses;
-    mapping (address => address) nftOwners;
+    mapping (address => address) nftOwners;  // [Key]: Owner address -> NFT address (of the Proof of voting)
 
     constructor() public {}
 
@@ -26,8 +26,22 @@ contract ProofOfVotingNFTFactory {
     //----------------
     // Getter methods
     //----------------
-    function getCountOfProofOfVotingNFTs(address voter) public view returns (uint _proofOfVotingNFTs) {
-        // [Todo]: Return number of NFTs which voter has
+
+    /**
+     * @notice - This method return number of NFTs which voter has.
+     */
+    function getCountOfProofOfVotingNFTs(address voter) public view returns (uint _countOfProofOfVotingNFTs) {
+        uint countOfProofOfVotingNFTs;
+
+        for (uint i=0; i < proofOfVotingNFTAddresses.length; i++) {
+            address nftOwner = proofOfVotingNFTAddresses[i];
+
+            if (nftOwner == voter) {
+                countOfProofOfVotingNFTs++;
+            }
+        }
+
+        return countOfProofOfVotingNFTs;
     }
 
 
