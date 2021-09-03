@@ -6,6 +6,8 @@
   "scripts": {
     "accounts": "npx hardhat accounts --network hardhat",
     "test": "npx hardhat test --network hardhat",
+    "test:Comp": "npx hardhat test ./test/Comp.test.js --network hardhat",
+    "test:Scenario": "npx hardhat test ./test/Scenario.test.js --network hardhat",
     "compile": "npx hardhat compile",
     "deploy": "npx hardhat run scripts/Deploy.js",
     "node": "npx hardhat node",
