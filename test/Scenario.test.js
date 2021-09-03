@@ -1,5 +1,14 @@
 const { expect } = require("chai")
 
+const {
+  encodeParameters,
+  etherUnsigned,
+  freezeTime,
+  keccak256
+} = require('./Utils/Ethereum');
+
+const oneWeekInSeconds = etherUnsigned(7 * 24 * 60 * 60);
+
 /**
  * @notice - This is the test of whole scenario
  */ 
@@ -10,12 +19,21 @@ describe("Scenario test", function() {
     let deployer, user1, user2, user3
 
     /// Contract instance
+    let Timelock, timelock
     let Comp, comp
 
     it("Assign accounts", async function() {
         accounts = await hre.ethers.getSigners()
         deployer = accounts[0].address
         user1 = accounts[1].address
+    })
+
+    it("Deploy the Timelock.sol", async function() {
+        const admin = deployer
+        const delay = oneWeekInSeconds
+
+        Timelock = await ethers.getContractFactory("Timelock")
+        timelock = await Timelock.deploy(admin, delay)    
     })
 
     it("Deploy the Comp.sol", async function() {
