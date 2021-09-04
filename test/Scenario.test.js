@@ -72,7 +72,7 @@ describe("Scenario test", function() {
 
         it("Should return the Comp balance", async function() {
             const dst = voter1
-            const rawAmount = ethers.utils.parseEther('2000')  /// 2000 COMP
+            const rawAmount = ethers.utils.parseEther('400001')  /// 400001 COMP
             let txReceipt2 = await comp.transfer(dst, rawAmount)
             console.log('=== txReceipt of comp.transfer() ===', txReceipt2)
         })
@@ -83,8 +83,24 @@ describe("Scenario test", function() {
     /// General process (propose - cast voting)
     ///-----------------------------------------
     describe("General process (propose - cast voting)", function() {
-        it("Propose a proposal", async function() {
+        it("Comp balance of voter1 should be 400001 COMP", async function() {
+            let _compBalance = await comp.balanceOf(voter1)
+            let compBalance = ethers.utils.formatEther(String(_compBalance))
+            console.log('=== Comp balance of deployer ===',  compBalance) // fromETH
+            expect(compBalance).to.equal("400001.0")  /// 400,001 COMP
+        })
 
+        it("Propose a proposal", async function() {
+            const targets = [voter1]
+            const values = ["100001"]  // Proposal should be created by voter who has more than 100,000 Comp = 1% of Comp
+            const signatures = ["getBalanceOf(address)"]
+            const calldatas = [encodeParameters(['address'], [voter1])]
+            const description = "This is a test proposal."
+
+            let txReceipt1 = await comp.delegate(voter1)
+
+            /// [Error]: "GovernorAlpha::propose: proposer votes below proposal threshold"
+            let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
         })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {})
