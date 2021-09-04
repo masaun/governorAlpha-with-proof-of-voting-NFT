@@ -1,6 +1,13 @@
+"use strict";
+
 /// Using local network
 const Web3 = require('web3')
 const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'))
+const ethers = require('ethers')
+
+/// Openzeppelin test-helper
+const { time, constants, expectRevert, expectEvent } = require('@openzeppelin/test-helpers')
+
 
 function toWei(amount) {
     return web3.utils.toWei(`${ amount }`, 'ether')

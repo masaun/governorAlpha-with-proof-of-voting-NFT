@@ -1,3 +1,9 @@
+/// Openzeppelin test-helper
+//const { time, constants, expectRevert, expectEvent } = require('@openzeppelin/test-helpers')
+
+/// web3.js related methods
+const { toWei, fromWei, getEvents, getCurrentBlock, getCurrentTimestamp } = require('./web3js-helper/web3jsHelper')
+
 const { expect } = require("chai")
 
 const {
@@ -100,10 +106,17 @@ describe("Scenario test", function() {
 
             let txReceipt1 = await comp.delegate(deployer)
             let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
+
+            /// [Todo]: Get event log
+            let proposalId = await getEvents(governorAlpha, "ProposalCreated")
+            console.log('=== proposalId created ===',  proposalId)
         })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {
+            const proposalId = 1  // [Todo]: Replace proposalId which is retrieved via an event log
+            const support = false
             
+            let txReceipt = await governorAlpha.castVote(proposalId, support)
         })
     })
 
