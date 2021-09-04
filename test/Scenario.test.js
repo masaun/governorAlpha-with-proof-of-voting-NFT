@@ -7,7 +7,11 @@ const { toWei, fromWei, getEvents, getCurrentBlock, getCurrentTimestamp } = requ
 const { expect } = require("chai")
 
 const {
+  address,
+  etherMantissa,
   encodeParameters,
+  mineBlock,
+  unlockedAccount,
   etherUnsigned,
   freezeTime,
   keccak256
@@ -106,6 +110,7 @@ describe("Scenario test", function() {
 
             let txReceipt1 = await comp.delegate(deployer)
             let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
+            //console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
 
             /// [Todo]: Get event log
             let proposalId = await getEvents(governorAlpha, "ProposalCreated")
@@ -113,9 +118,13 @@ describe("Scenario test", function() {
         })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {
+            await mineBlock()
+            await mineBlock()
+
             const proposalId = 1  // [Todo]: Replace proposalId which is retrieved via an event log
             const support = false
             
+            /// [Error]: "GovernorAlpha::_castVote: voting is closed"
             let txReceipt = await governorAlpha.castVote(proposalId, support)
         })
     })
