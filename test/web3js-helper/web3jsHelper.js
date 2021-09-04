@@ -44,9 +44,18 @@ async function getCurrentTimestamp() {
     return currentTimestamp
 }
 
+async function getLatestBlock() {
+    return await time.latestBlock()
+}
+
 async function advanceBlock() {
     await time.advanceBlock()
 }
 
+async function advanceBlockTo(target) {
+    await time.advanceBlockTo(target)
+}
+
+
 /// Export methods
-module.exports = { toWei, fromWei, getEvents, getCurrentBlock, getCurrentTimestamp, advanceBlock }
+module.exports = { toWei, fromWei, getEvents, getCurrentBlock, getCurrentTimestamp, getLatestBlock, advanceBlock, advanceBlockTo }

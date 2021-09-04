@@ -2,7 +2,7 @@
 const { time, constants, expectRevert, expectEvent } = require('@openzeppelin/test-helpers')
 
 /// web3.js related methods
-const { toWei, fromWei, getEvents, getCurrentBlock, getCurrentTimestamp, advanceBlock } = require('./web3js-helper/web3jsHelper')
+const { toWei, fromWei, getEvents, getCurrentBlock, getCurrentTimestamp, getLatestBlock, advanceBlock, advanceBlockTo } = require('./web3js-helper/web3jsHelper')
 
 const { expect } = require("chai")
 
@@ -118,11 +118,8 @@ describe("Scenario test", function() {
         })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {
-            // await mineBlock()
-            // await mineBlock()
-            await advanceBlock()
-            await advanceBlock()
-
+            let latestBlock = await getLatestBlock()
+            await advanceBlockTo(latestBlock + 2592000)  /// [NOTE]: 2592000 seconds == 1 month
 
             const proposalId = 1  // [Todo]: Replace proposalId which is retrieved via an event log
             const support = false
