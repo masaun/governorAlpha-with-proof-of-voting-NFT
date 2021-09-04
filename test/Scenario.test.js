@@ -1,8 +1,8 @@
 /// Openzeppelin test-helper
-//const { time, constants, expectRevert, expectEvent } = require('@openzeppelin/test-helpers')
+const { time, constants, expectRevert, expectEvent } = require('@openzeppelin/test-helpers')
 
 /// web3.js related methods
-const { toWei, fromWei, getEvents, getCurrentBlock, getCurrentTimestamp } = require('./web3js-helper/web3jsHelper')
+const { toWei, fromWei, getEvents, getCurrentBlock, getCurrentTimestamp, advanceBlock } = require('./web3js-helper/web3jsHelper')
 
 const { expect } = require("chai")
 
@@ -113,13 +113,16 @@ describe("Scenario test", function() {
             //console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
 
             /// [Todo]: Get event log
-            let proposalId = await getEvents(governorAlpha, "ProposalCreated")
-            console.log('=== proposalId created ===',  proposalId)
+            //let proposalId = await getEvents(governorAlpha, "ProposalCreated")
+            //console.log('=== proposalId created ===',  proposalId)
         })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {
-            await mineBlock()
-            await mineBlock()
+            // await mineBlock()
+            // await mineBlock()
+            await advanceBlock()
+            await advanceBlock()
+
 
             const proposalId = 1  // [Todo]: Replace proposalId which is retrieved via an event log
             const support = false
