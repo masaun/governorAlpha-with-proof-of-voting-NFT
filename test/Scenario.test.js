@@ -91,15 +91,14 @@ describe("Scenario test", function() {
         })
 
         it("Propose a proposal", async function() {
-            const targets = [voter1]
-            const values = ["100001"]  // Proposal should be created by voter who has more than 100,000 Comp = 1% of Comp
+            const targets = [deployer]
+            //const values = ["0"]
+            const values = ["400001"]  // Proposal should be created by voter who has more than 400,001 Comp = 24.9% of Comp (totalSupply of Comp is 10 million Comp / 400,001 Comp)
             const signatures = ["getBalanceOf(address)"]
-            const calldatas = [encodeParameters(['address'], [voter1])]
+            const calldatas = [encodeParameters(['address'], [deployer])]
             const description = "This is a test proposal."
 
-            let txReceipt1 = await comp.delegate(voter1)
-
-            /// [Error]: "GovernorAlpha::propose: proposer votes below proposal threshold"
+            let txReceipt1 = await comp.delegate(deployer)
             let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
         })
 
