@@ -102,7 +102,9 @@ describe("Scenario test", function() {
             let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
         })
 
-        it("Cast voting and distribute NFTs into voters (wallets)", async function() {})
+        it("Cast voting and distribute NFTs into voters (wallets)", async function() {
+            
+        })
     })
 
 
