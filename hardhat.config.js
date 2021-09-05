@@ -39,10 +39,10 @@ module.exports = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
-      forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`
-        //blockNumber: 11589707
-      }
+      // forking: {
+      //   url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`
+      //   //blockNumber: 11589707
+      // }
     },
     local: {
       url: "http://127.0.0.1:8545"

@@ -101,7 +101,7 @@ describe("Scenario test", function() {
             expect(compBalance).to.equal("400001.0")  /// 400,001 COMP
         })
 
-        it("Propose a proposal", async function() {
+        it("Create a new proposal (by using the propose method)", async function() {
             const targets = [deployer]
             //const values = ["0"]
             const values = ["400001"]  // Proposal should be created by voter who has more than 400,001 Comp = 24.9% of Comp (totalSupply of Comp is 10 million Comp / 400,001 Comp)
@@ -111,11 +111,11 @@ describe("Scenario test", function() {
 
             let txReceipt1 = await comp.delegate(deployer)
             let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
-            //console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
+            console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
 
-            /// [Todo]: Get event log
-            //let proposalId = await getEvents(governorAlpha, "ProposalCreated")
-            //console.log('=== proposalId created ===',  proposalId)
+            /// [Todo]: Get event log (<- Need to use a contract instance created via Hardhat. Not via Truffle)
+            let proposalId = await getEvents(governorAlpha, "ProposalCreated")
+            console.log('=== proposalId created ===',  proposalId)
         })
 
         it("Check whether proposalId=1 is created or not", async function() {
@@ -135,7 +135,7 @@ describe("Scenario test", function() {
             let latestBlock = await getLatestBlock()
             console.log('=== latestBlock (before advanceBlock) ===', String(latestBlock))
             //await advanceBlockTo(latestBlock + 11520)  /// [NOTE]: Voting period is "~3 days" in blocks (assuming 15s blocks). This is in case of voting at 2 days (11520 blocks)
-            //await advanceBlockTo(latestBlock + 5)        /// [NOTE]: Latest block number + 5 blocks
+            await advanceBlockTo(latestBlock + 5)        /// [NOTE]: Latest block number + 5 blocks
 
             console.log('=== latestBlock (after advanceBlock) ===', String(latestBlock))
 

@@ -20,6 +20,7 @@ function fromWei(amount) {
     return web3.utils.fromWei(`${ amount }`, 'ether')
 }
 
+
 async function getEvents(contractInstance, eventName) {
     const _latestBlock = await time.latestBlock()
     const LATEST_BLOCK = Number(String(_latestBlock))
