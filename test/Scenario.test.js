@@ -118,12 +118,24 @@ describe("Scenario test", function() {
             //console.log('=== proposalId created ===',  proposalId)
         })
 
+        it("Check whether proposalId=1 is created or not", async function() {
+            const proposalId = 1
+            const voter = deployer
+
+            let receiptOfProposal = await governorAlpha.getReceipt(proposalId, voter)
+            console.log('=== Receipt of proposal (proposalId=1) ===', receiptOfProposal)
+
+            let statusOfProposal = await governorAlpha.state(proposalId)
+            console.log('=== Status of proposal (proposalId=1) ===', statusOfProposal)
+        })
+
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {
             /// [Problem]: Returned-value is empty
             //let latestBlock = await time.latestBlock()
             let latestBlock = await getLatestBlock()
             console.log('=== latestBlock (before advanceBlock) ===', String(latestBlock))
-            await advanceBlockTo(latestBlock + 11520)  /// [NOTE]: Voting period is "~3 days" in blocks (assuming 15s blocks). This is in case of voting at 2 days (11520 blocks)
+            //await advanceBlockTo(latestBlock + 11520)  /// [NOTE]: Voting period is "~3 days" in blocks (assuming 15s blocks). This is in case of voting at 2 days (11520 blocks)
+            //await advanceBlockTo(latestBlock + 5)        /// [NOTE]: Latest block number + 5 blocks
 
             console.log('=== latestBlock (after advanceBlock) ===', String(latestBlock))
 
