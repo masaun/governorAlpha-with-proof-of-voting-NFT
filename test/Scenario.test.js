@@ -14,7 +14,8 @@ const {
   unlockedAccount,
   etherUnsigned,
   freezeTime,
-  keccak256
+  keccak256,
+  blockNumber
 } = require('./Utils/Ethereum')
 
 const oneWeekInSeconds = etherUnsigned(7 * 24 * 60 * 60)
@@ -84,7 +85,7 @@ describe("Scenario test", function() {
             const dst = voter1
             const rawAmount = ethers.utils.parseEther('400001')  /// 400001 COMP
             let txReceipt2 = await comp.transfer(dst, rawAmount)
-            console.log('=== txReceipt of comp.transfer() ===', txReceipt2)
+            //console.log('=== txReceipt of comp.transfer() ===', txReceipt2)
         })
     })
 
@@ -118,7 +119,10 @@ describe("Scenario test", function() {
         })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {
+            /// [Problem]: Returned-value is empty
+            //let latestBlock = await time.latestBlock()
             let latestBlock = await getLatestBlock()
+            console.log('=== latestBlock ===', String(latestBlock))
             await advanceBlockTo(latestBlock + 2592000)  /// [NOTE]: 2592000 seconds == 1 month
 
             const proposalId = 1  // [Todo]: Replace proposalId which is retrieved via an event log

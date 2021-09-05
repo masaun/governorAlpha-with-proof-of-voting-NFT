@@ -8,6 +8,7 @@
     "test": "npx hardhat test --network hardhat",
     "test:Comp": "npx hardhat test ./test/Comp.test.js --network hardhat",
     "test:Scenario": "npx hardhat test ./test/Scenario.test.js --network hardhat",
+    "test-truffle:Scenario": "truffle test ./test/Scenario.test.js --network local",
     "compile": "npx hardhat compile",
     "deploy": "npx hardhat run scripts/Deploy.js",
     "node": "npx hardhat node",
@@ -25,6 +26,7 @@
     "dotenv": "^8.2.0",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.6",
-    "hardhat": "^2.6.1"
+    "hardhat": "^2.6.1",
+    "@truffle/hdwallet-provider": "^1.5.0"
   }
 }
