@@ -115,7 +115,7 @@ describe("Scenario test", function() {
 
             /// [Todo]: Get event log (<- Need to use a contract instance created via Hardhat. Not via Truffle)
             let proposalId = await getEvents(governorAlpha, "ProposalCreated")
-            console.log('=== proposalId created ===',  proposalId)
+            console.log('=== proposalId created ===', proposalId)
         })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {

@@ -2,15 +2,21 @@
 
 require('dotenv').config()
 
-/// Using local network
-const Web3 = require('web3')
-const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'))
-//const web3 = new Web3(new Web3.providers.HttpProvider(`https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_KEY}`));
-const ethers = require('ethers')
-
 /// Openzeppelin test-helper
 const { time, constants, expectRevert, expectEvent } = require('@openzeppelin/test-helpers')
 
+/// ether.js
+const ethers = require('ethers')
+
+/// web3.js
+const Web3 = require('web3')
+const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'))
+// const DEFAULT_PROVIDER_URL = 'http://localhost:8545'
+// const localWeb3 = new Web3()
+// setWeb3Provider(DEFAULT_PROVIDER_URL)
+// function setWeb3Provider (provider) {
+//   localWeb3.setProvider(provider)
+// }
 
 function toWei(amount) {
     return web3.utils.toWei(`${ amount }`, 'ether')
@@ -20,7 +26,10 @@ function fromWei(amount) {
     return web3.utils.fromWei(`${ amount }`, 'ether')
 }
 
-
+/**
+ * @notice - Retrieve an event
+ * @notice - "contractInstance" should be a contract instance created by Truffle (Not by Hardhat)
+ */ 
 async function getEvents(contractInstance, eventName) {
     const _latestBlock = await time.latestBlock()
     const LATEST_BLOCK = Number(String(_latestBlock))
