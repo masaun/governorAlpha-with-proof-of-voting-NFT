@@ -114,8 +114,8 @@ describe("Scenario test", function() {
             console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
 
             /// [Todo]: Get event log (<- Need to use a contract instance created via Hardhat. Not via Truffle)
-            let proposalId = await getEvents(governorAlpha, "ProposalCreated")
-            console.log('=== proposalId created ===', proposalId)
+            //let proposalId = await getEvents(governorAlpha, "ProposalCreated")
+            //console.log('=== proposalId created ===', proposalId)
         })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {
@@ -152,8 +152,17 @@ describe("Scenario test", function() {
     ///---------------------------------
     ///  Rewards distribution process
     ///---------------------------------
+    
     describe("Rewards distribution process", function() {
-        it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has ", async function() {})
+        it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has", async function() {
+            /// [Todo]: Create COMP Treasury (the rewards vault) in the contract
+
+
+            /// [Todo]: Deposit some COMP tokens into the COMP Treasury
+
+
+            /// [Todo]: Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has
+        })
     })
 
 })
