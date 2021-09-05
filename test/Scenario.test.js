@@ -118,17 +118,6 @@ describe("Scenario test", function() {
             console.log('=== proposalId created ===',  proposalId)
         })
 
-        it("Check whether proposalId=1 is created or not", async function() {
-            const proposalId = 1
-            const voter = deployer
-
-            let receiptOfProposal = await governorAlpha.getReceipt(proposalId, voter)
-            console.log('=== Receipt of proposal (proposalId=1) ===', receiptOfProposal)
-
-            let statusOfProposal = await governorAlpha.state(proposalId)
-            console.log('=== Status of proposal (proposalId=1) ===', statusOfProposal)
-        })
-
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {
             /// [Problem]: Returned-value is empty
             //let latestBlock = await time.latestBlock()
@@ -142,9 +131,21 @@ describe("Scenario test", function() {
             const proposalId = 1  // [Todo]: Replace proposalId which is retrieved via an event log
             const support = false
             
-            /// [Error]: "GovernorAlpha::_castVote: voting is closed"
+            /// [Error]: "GovernorAlpha::_castVote: voting is closed" -> [Successful]: by commentout "forking" in the hardhat.config.js
             let txReceipt = await governorAlpha.castVote(proposalId, support)
         })
+
+        it("Check the status of proposalId=1", async function() {
+            const proposalId = 1
+            const voter = deployer
+
+            let receiptOfProposal = await governorAlpha.getReceipt(proposalId, voter)
+            console.log('=== Receipt of proposal (proposalId=1) ===', receiptOfProposal)
+
+            let statusOfProposal = await governorAlpha.state(proposalId)
+            console.log('=== Status of proposal (proposalId=1) ===', statusOfProposal)
+        })
+
     })
 
 
