@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
+require("@nomiclabs/hardhat-web3")     /// [NOTE]: For using web3.js + @openzeppelin/test-helpers on Hardhat
 require('dotenv').config()
 
 // This is a sample Hardhat task. To learn how to create your own go to
