@@ -122,8 +122,10 @@ describe("Scenario test", function() {
             /// [Problem]: Returned-value is empty
             //let latestBlock = await time.latestBlock()
             let latestBlock = await getLatestBlock()
-            console.log('=== latestBlock ===', String(latestBlock))
+            console.log('=== latestBlock (before advanceBlock) ===', String(latestBlock))
             await advanceBlockTo(latestBlock + 11520)  /// [NOTE]: Voting period is "~3 days" in blocks (assuming 15s blocks). This is in case of voting at 2 days (11520 blocks)
+
+            console.log('=== latestBlock (after advanceBlock) ===', String(latestBlock))
 
             const proposalId = 1  // [Todo]: Replace proposalId which is retrieved via an event log
             const support = false
