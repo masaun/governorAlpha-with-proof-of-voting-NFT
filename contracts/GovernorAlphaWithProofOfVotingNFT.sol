@@ -12,7 +12,11 @@ import { GovernorAlpha } from "./compound/Governance/GovernorAlpha.sol";
  */
 contract GovernorAlphaWithProofOfVotingNFT is GovernorAlpha {
 
+    /// @notice The address of the ProofOfVotingNFTFactory contract
+    ProofOfVotingNFTFactory public proofOfVotingNFTFactory;
+
     constructor(address timelock_, address comp_, address guardian_, address proofOfVotingNFTFactory_) GovernorAlpha(timelock_, comp_, guardian_, proofOfVotingNFTFactory_) public {
+        proofOfVotingNFTFactory = ProofOfVotingNFTFactory(proofOfVotingNFTFactory_);
     }
 
     function castVoteWithProofOfVotingNFT(uint proposalId, bool support) public {
