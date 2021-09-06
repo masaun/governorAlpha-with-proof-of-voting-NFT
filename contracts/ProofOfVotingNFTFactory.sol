@@ -34,13 +34,12 @@ contract ProofOfVotingNFTFactory {
         uint countOfProofOfVotingNFTs;
 
         for (uint i=0; i < proofOfVotingNFTAddresses.length; i++) {
-            address nftOwner = proofOfVotingNFTAddresses[i];
+            address PROOF_OF_VOTING_NFT = proofOfVotingNFTAddresses[i];
+            address nftOwner = nftOwners[PROOF_OF_VOTING_NFT];
 
-            // if (nftOwner == voter) {
-            //     countOfProofOfVotingNFTs++;
-            // }
-
-            countOfProofOfVotingNFTs++;
+            if (nftOwner == voter) {
+                countOfProofOfVotingNFTs++;
+            }
         }
 
         return countOfProofOfVotingNFTs;
