@@ -27,7 +27,6 @@
     "dotenv": "^8.2.0",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.6",
-    "hardhat": "^2.6.1",
-    "@truffle/hdwallet-provider": "^1.5.0"
+    "hardhat": "^2.6.1"
   }
 }
