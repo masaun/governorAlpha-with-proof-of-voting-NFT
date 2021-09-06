@@ -125,7 +125,7 @@ describe("Scenario test", function() {
             //console.log('=== proposalId created ===', proposalId)
         })
 
-        it("Cast voting and distribute NFTs into voters (wallets)", async function() {
+        it("Cast voting (for proposalId=1) and distribute NFTs into voter's wallet", async function() {
             /// [Problem]: Returned-value is empty
             //let latestBlock = await time.latestBlock()
             let latestBlock = await getLatestBlock()
@@ -165,6 +165,12 @@ describe("Scenario test", function() {
             const depositAmount = ethers.utils.parseEther('10000')  /// 10,000 COMP
             let txReceipt1 = comp.approve(REWARDS_VAULT, depositAmount)
             let txReceipt2 = rewardsVault.depositRewardToken(depositAmount)
+        })
+
+        it("Check reward tokens (COMP Tokens) balance of the Rewards Vault", async function() {
+            let _rewardTokenBalance = await comp.balanceOf(REWARDS_VAULT)
+            const rewardTokenBalance = ethers.utils.formatEther(_rewardTokenBalance)
+            console.log('=== rewardTokenBalance ===', rewardTokenBalance)
         })
 
         it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has", async function() {
