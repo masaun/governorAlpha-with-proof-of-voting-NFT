@@ -258,14 +258,14 @@ contract GovernorAlpha {
     }
 
     function castVote(uint proposalId, bool support) public {
+        _castVote(msg.sender, proposalId, support);
+        //return _castVote(msg.sender, proposalId, support);
+
         // [Note]: Mint a proof of voting NFT into a voter's wallet 
         proofOfVotingNFTFactory.createNewProofOfVotingNFT(msg.sender);
         address latestProofOfVotingNFTAddress = proofOfVotingNFTFactory.getLatestProofOfVotingNFTAddress();
         ProofOfVotingNFT proofOfVotingNFT = ProofOfVotingNFT(latestProofOfVotingNFTAddress);
         proofOfVotingNFT.mintProofOfVotingNFTs(msg.sender);
-
-        _castVote(msg.sender, proposalId, support);
-        //return _castVote(msg.sender, proposalId, support);
     }
 
     function castVoteBySig(uint proposalId, bool support, uint8 v, bytes32 r, bytes32 s) public {

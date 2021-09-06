@@ -36,9 +36,11 @@ contract ProofOfVotingNFTFactory {
         for (uint i=0; i < proofOfVotingNFTAddresses.length; i++) {
             address nftOwner = proofOfVotingNFTAddresses[i];
 
-            if (nftOwner == voter) {
-                countOfProofOfVotingNFTs++;
-            }
+            // if (nftOwner == voter) {
+            //     countOfProofOfVotingNFTs++;
+            // }
+
+            countOfProofOfVotingNFTs++;
         }
 
         return countOfProofOfVotingNFTs;
