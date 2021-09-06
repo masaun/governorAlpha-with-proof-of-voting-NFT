@@ -32,6 +32,7 @@ describe("Scenario test", function() {
     /// Contract instance
     let Timelock, timelock, TIMELOCK
     let Comp, comp, COMP
+    let RewardsVault, rewardsVault, REWARDS_VAULT
     let GovernorAlpha, governorAlpha, GOVERNOR_ALPHA
 
     describe("Deploy smart contracts", function() {
@@ -64,6 +65,12 @@ describe("Scenario test", function() {
             ProofOfVotingNFTFactory = await ethers.getContractFactory("ProofOfVotingNFTFactory")
             proofOfVotingNFTFactory = await ProofOfVotingNFTFactory.deploy()
             PROOF_OF_VOTING_NFT_FACTORY = proofOfVotingNFTFactory.address
+        })
+
+        it("Deploy the RewardsVault.sol", async function() {
+            RewardsVault = await ethers.getContractFactory("RewardsVault")
+            rewardsVault = await RewardsVault.deploy(COMP, PROOF_OF_VOTING_NFT_FACTORY)
+            REWARDS_VAULT = rewardsVault.address
         })
 
         it("Deploy the GovernorAlpha.sol", async function() {
@@ -114,8 +121,8 @@ describe("Scenario test", function() {
             console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
 
             /// [Todo]: Get event log (<- Need to use a contract instance created via Hardhat. Not via Truffle)
-            let proposalId = await getEvents(governorAlpha, "ProposalCreated")
-            console.log('=== proposalId created ===',  proposalId)
+            //let proposalId = await getEvents(governorAlpha, "ProposalCreated")
+            //console.log('=== proposalId created ===', proposalId)
         })
 
         it("Cast voting and distribute NFTs into voters (wallets)", async function() {
@@ -152,8 +159,18 @@ describe("Scenario test", function() {
     ///---------------------------------
     ///  Rewards distribution process
     ///---------------------------------
+    
     describe("Rewards distribution process", function() {
-        it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has ", async function() {})
+        it("Deposit reward tokens (COMP Tokens) into the Rewards Vault", async function() {
+            const depositAmount = ethers.utils.parseEther('10000')  /// 10,000 COMP
+            let txReceipt1 = comp.approve(REWARDS_VAULT, depositAmount)
+            let txReceipt2 = rewardsVault.depositRewardToken(depositAmount)
+        })
+
+        it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has", async function() {
+            const voter = deployer
+            let txReceipt2 = rewardsVault.distributeRewardToken(voter)
+        })
     })
 
 })
