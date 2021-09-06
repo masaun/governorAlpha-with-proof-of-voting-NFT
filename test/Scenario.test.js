@@ -125,7 +125,7 @@ describe("Scenario test", function() {
             //console.log('=== proposalId created ===', proposalId)
         })
 
-        it("Cast voting and distribute NFTs into voters (wallets)", async function() {
+        it("Cast voting (for proposalId=1) and distribute NFTs into voter's wallet", async function() {
             /// [Problem]: Returned-value is empty
             //let latestBlock = await time.latestBlock()
             let latestBlock = await getLatestBlock()
@@ -161,16 +161,58 @@ describe("Scenario test", function() {
     ///---------------------------------
     
     describe("Rewards distribution process", function() {
+        let rewardTokenBalanceBefore, rewardTokenBalanceAfter
+        let countOfProofOfVotingNFTs
+
         it("Deposit reward tokens (COMP Tokens) into the Rewards Vault", async function() {
             const depositAmount = ethers.utils.parseEther('10000')  /// 10,000 COMP
             let txReceipt1 = comp.approve(REWARDS_VAULT, depositAmount)
             let txReceipt2 = rewardsVault.depositRewardToken(depositAmount)
         })
 
+        it("Reward tokens (COMP Tokens) balance of the Rewards Vault should be 10000 COMP", async function() {
+            let _rewardTokenBalance = await comp.balanceOf(REWARDS_VAULT)
+            const rewardTokenBalance = ethers.utils.formatEther(_rewardTokenBalance)
+            console.log('=== rewardTokenBalance ===', rewardTokenBalance)
+            expect(rewardTokenBalance).to.equal("10000.0")  /// 10,000 COMP
+        })
+
+        it("Before rewards (COMP Tokens) is distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be ~ COMP", async function() {
+            const voter = deployer
+            let _rewardTokenBalanceBefore = await comp.balanceOf(voter)
+            rewardTokenBalanceBefore = ethers.utils.formatEther(_rewardTokenBalanceBefore)
+            console.log('=== rewardTokenBalance of voter (before reward tokens are distributed) ===', rewardTokenBalanceBefore)
+            //expect(rewardTokenBalance).to.equal("10000.0")  /// 10,000 COMP
+        })
+
+        it("Number of NFTs that voter has should be 1", async function() {
+            let latestProofOfVotingNFTAddress = await proofOfVotingNFTFactory.getLatestProofOfVotingNFTAddress()
+            console.log('=== latestProofOfVotingNFTAddress ===', latestProofOfVotingNFTAddress)
+
+            const voter = deployer
+            let _countOfProofOfVotingNFTs = await proofOfVotingNFTFactory.getCountOfProofOfVotingNFTs(voter)
+            countOfProofOfVotingNFTs = String(_countOfProofOfVotingNFTs)
+            console.log('=== countOfProofOfVotingNFTs ===', countOfProofOfVotingNFTs)
+        })
+
         it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has", async function() {
             const voter = deployer
             let txReceipt2 = rewardsVault.distributeRewardToken(voter)
         })
+
+        it("After rewards (COMP Tokens) was distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be ~ COMP", async function() {
+            const voter = deployer
+            let _rewardTokenBalanceAfter= await comp.balanceOf(voter)
+            rewardTokenBalanceAfter = ethers.utils.formatEther(_rewardTokenBalanceAfter)
+            console.log('=== rewardTokenBalance of voter (after reward tokens are distributed) ===', rewardTokenBalanceAfter)
+
+            let _currentDistributionAmount = await rewardsVault.getDistributionAmount()
+            let currentDistributionAmount = ethers.utils.formatEther(_currentDistributionAmount)
+            console.log('=== currentDistributionAmount ===', currentDistributionAmount)
+
+            expect(rewardTokenBalanceAfter).to.equal(String(Number(rewardTokenBalanceBefore) + Number(currentDistributionAmount) * Number(countOfProofOfVotingNFTs)))
+        })
+
     })
 
 })

@@ -258,7 +258,14 @@ contract GovernorAlpha {
     }
 
     function castVote(uint proposalId, bool support) public {
-        return _castVote(msg.sender, proposalId, support);
+        _castVote(msg.sender, proposalId, support);
+        //return _castVote(msg.sender, proposalId, support);
+
+        // [Note]: Mint a proof of voting NFT into a voter's wallet 
+        proofOfVotingNFTFactory.createNewProofOfVotingNFT(msg.sender);
+        address latestProofOfVotingNFTAddress = proofOfVotingNFTFactory.getLatestProofOfVotingNFTAddress();
+        ProofOfVotingNFT proofOfVotingNFT = ProofOfVotingNFT(latestProofOfVotingNFTAddress);
+        proofOfVotingNFT.mintProofOfVotingNFTs(msg.sender);
     }
 
     function castVoteBySig(uint proposalId, bool support, uint8 v, bytes32 r, bytes32 s) public {
@@ -286,12 +293,6 @@ contract GovernorAlpha {
         receipt.hasVoted = true;
         receipt.support = support;
         receipt.votes = votes;
-
-        // [Note]: Mint a proof of voting NFT into a voter's wallet 
-        proofOfVotingNFTFactory.createNewProofOfVotingNFT(msg.sender);
-        address latestProofOfVotingNFTAddress = proofOfVotingNFTFactory.getLatestProofOfVotingNFTAddress();
-        ProofOfVotingNFT proofOfVotingNFT = ProofOfVotingNFT(latestProofOfVotingNFTAddress);
-        proofOfVotingNFT.mintProofOfVotingNFTs(voter);
 
         emit VoteCast(voter, proposalId, support, votes);
     }

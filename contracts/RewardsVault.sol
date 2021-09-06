@@ -50,4 +50,12 @@ contract RewardsVault {
 
         comp.transfer(voter, distributionAmount);
     }
+
+
+    //-----------------
+    // Getter methods
+    //-----------------
+    function getDistributionAmount() public view returns (uint _currentDistributionAmount) {
+        return DISTRIBUTION_AMOUNT;
+    }
 }
