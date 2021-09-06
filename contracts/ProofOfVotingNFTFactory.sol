@@ -10,7 +10,7 @@ import { ProofOfVotingNFT } from "./ProofOfVotingNFT.sol";
 contract ProofOfVotingNFTFactory {
 
     address[] public proofOfVotingNFTAddresses;
-    mapping (address => address) nftOwners;  // [Key]: Owner address -> NFT address (of the Proof of voting)
+    mapping (address => address) nftOwners;  // [Key]: NFT (Proof of Voting NFT) address -> Owner address ->
 
     constructor() public {}
 
