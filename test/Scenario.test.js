@@ -74,7 +74,8 @@ describe("Scenario test", function() {
         })
 
         it("Deploy the GovernorAlpha.sol", async function() {
-            GovernorAlpha = await ethers.getContractFactory("contracts/compound/Governance/GovernorAlpha.sol:GovernorAlpha")
+            GovernorAlpha = await ethers.getContractFactory("GovernorAlphaWithProofOfVotingNFT")
+            //GovernorAlpha = await ethers.getContractFactory("contracts/compound/Governance/GovernorAlpha.sol:GovernorAlpha")
             governorAlpha = await GovernorAlpha.deploy(TIMELOCK, COMP, guardian, PROOF_OF_VOTING_NFT_FACTORY)
             GOVERNOR_ALPHA = governorAlpha.address
         })
