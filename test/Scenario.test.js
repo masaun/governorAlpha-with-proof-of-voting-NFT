@@ -74,7 +74,8 @@ describe("Scenario test", function() {
         })
 
         it("Deploy the GovernorAlpha.sol", async function() {
-            GovernorAlpha = await ethers.getContractFactory("contracts/compound/Governance/GovernorAlpha.sol:GovernorAlpha")
+            GovernorAlpha = await ethers.getContractFactory("GovernorAlphaWithProofOfVotingNFT")
+            //GovernorAlpha = await ethers.getContractFactory("contracts/compound/Governance/GovernorAlpha.sol:GovernorAlpha")
             governorAlpha = await GovernorAlpha.deploy(TIMELOCK, COMP, guardian, PROOF_OF_VOTING_NFT_FACTORY)
             GOVERNOR_ALPHA = governorAlpha.address
         })
@@ -138,8 +139,8 @@ describe("Scenario test", function() {
             const proposalId = 1  // [Todo]: Replace proposalId which is retrieved via an event log
             const support = false
             
-            /// [Error]: "GovernorAlpha::_castVote: voting is closed" -> [Successful]: by commentout "forking" in the hardhat.config.js
-            let txReceipt = await governorAlpha.castVote(proposalId, support)
+            let txReceipt = await governorAlpha.castVoteWithProofOfVotingNFT(proposalId, support)
+            //let txReceipt = await governorAlpha.castVote(proposalId, support)
         })
 
         it("Check the status of proposalId=1", async function() {
@@ -177,7 +178,7 @@ describe("Scenario test", function() {
             expect(rewardTokenBalance).to.equal("10000.0")  /// 10,000 COMP
         })
 
-        it("Before rewards (COMP Tokens) is distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be ~ COMP", async function() {
+        it("Before rewards (COMP Tokens) is distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be 9589999.0 COMP", async function() {
             const voter = deployer
             let _rewardTokenBalanceBefore = await comp.balanceOf(voter)
             rewardTokenBalanceBefore = ethers.utils.formatEther(_rewardTokenBalanceBefore)
@@ -200,7 +201,7 @@ describe("Scenario test", function() {
             let txReceipt2 = rewardsVault.distributeRewardToken(voter)
         })
 
-        it("After rewards (COMP Tokens) was distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be ~ COMP", async function() {
+        it("After rewards (COMP Tokens) was distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be 9589999.01 COMP", async function() {
             const voter = deployer
             let _rewardTokenBalanceAfter= await comp.balanceOf(voter)
             rewardTokenBalanceAfter = ethers.utils.formatEther(_rewardTokenBalanceAfter)
