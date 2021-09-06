@@ -139,8 +139,8 @@ describe("Scenario test", function() {
             const proposalId = 1  // [Todo]: Replace proposalId which is retrieved via an event log
             const support = false
             
-            /// [Error]: "GovernorAlpha::_castVote: voting is closed" -> [Successful]: by commentout "forking" in the hardhat.config.js
-            let txReceipt = await governorAlpha.castVote(proposalId, support)
+            let txReceipt = await governorAlpha.castVoteWithProofOfVotingNFT(proposalId, support)
+            //let txReceipt = await governorAlpha.castVote(proposalId, support)
         })
 
         it("Check the status of proposalId=1", async function() {
