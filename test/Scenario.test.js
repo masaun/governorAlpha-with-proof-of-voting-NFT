@@ -177,7 +177,7 @@ describe("Scenario test", function() {
             expect(rewardTokenBalance).to.equal("10000.0")  /// 10,000 COMP
         })
 
-        it("Before rewards (COMP Tokens) is distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be ~ COMP", async function() {
+        it("Before rewards (COMP Tokens) is distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be 9589999.0 COMP", async function() {
             const voter = deployer
             let _rewardTokenBalanceBefore = await comp.balanceOf(voter)
             rewardTokenBalanceBefore = ethers.utils.formatEther(_rewardTokenBalanceBefore)
@@ -200,7 +200,7 @@ describe("Scenario test", function() {
             let txReceipt2 = rewardsVault.distributeRewardToken(voter)
         })
 
-        it("After rewards (COMP Tokens) was distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be ~ COMP", async function() {
+        it("After rewards (COMP Tokens) was distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be 9589999.01 COMP", async function() {
             const voter = deployer
             let _rewardTokenBalanceAfter= await comp.balanceOf(voter)
             rewardTokenBalanceAfter = ethers.utils.formatEther(_rewardTokenBalanceAfter)
