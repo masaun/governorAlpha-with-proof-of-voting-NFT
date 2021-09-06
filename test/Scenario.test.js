@@ -168,7 +168,8 @@ describe("Scenario test", function() {
         })
 
         it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has", async function() {
-            /// [Todo]: Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has
+            const voter = deployer
+            let txReceipt2 = rewardsVault.distributeRewardToken(voter)
         })
     })
 
