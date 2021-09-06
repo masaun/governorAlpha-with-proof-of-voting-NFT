@@ -167,10 +167,18 @@ describe("Scenario test", function() {
             let txReceipt2 = rewardsVault.depositRewardToken(depositAmount)
         })
 
-        it("Check reward tokens (COMP Tokens) balance of the Rewards Vault", async function() {
+        it("Reward tokens (COMP Tokens) balance of the Rewards Vault should be 10000 COMP", async function() {
             let _rewardTokenBalance = await comp.balanceOf(REWARDS_VAULT)
             const rewardTokenBalance = ethers.utils.formatEther(_rewardTokenBalance)
             console.log('=== rewardTokenBalance ===', rewardTokenBalance)
+            expect(rewardTokenBalance).to.equal("10000.0")  /// 10,000 COMP
+        })
+
+        it("Number of NFTs that voter has should be 1", async function() {
+            const voter = deployer
+            let _countOfProofOfVotingNFTs = await proofOfVotingNFTFactory.getCountOfProofOfVotingNFTs(voter)
+            const countOfProofOfVotingNFTs = ethers.utils.formatEther(_countOfProofOfVotingNFTs)
+            console.log('=== countOfProofOfVotingNFTs ===', countOfProofOfVotingNFTs)
         })
 
         it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has", async function() {
