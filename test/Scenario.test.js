@@ -174,6 +174,14 @@ describe("Scenario test", function() {
             expect(rewardTokenBalance).to.equal("10000.0")  /// 10,000 COMP
         })
 
+        it("Before rewards (COMP Tokens) is distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be ~ COMP", async function() {
+            const voter = deployer
+            let _rewardTokenBalance = await comp.balanceOf(voter)
+            const rewardTokenBalance = ethers.utils.formatEther(_rewardTokenBalance)
+            console.log('=== rewardTokenBalance of voter (before reward tokens are distributed) ===', rewardTokenBalance)
+            //expect(rewardTokenBalance).to.equal("10000.0")  /// 10,000 COMP
+        })
+
         it("Number of NFTs that voter has should be 1", async function() {
             const voter = deployer
             let _countOfProofOfVotingNFTs = await proofOfVotingNFTFactory.getCountOfProofOfVotingNFTs(voter)
@@ -185,6 +193,15 @@ describe("Scenario test", function() {
             const voter = deployer
             let txReceipt2 = rewardsVault.distributeRewardToken(voter)
         })
+
+        it("After rewards (COMP Tokens) was distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be ~ COMP", async function() {
+            const voter = deployer
+            let _rewardTokenBalance = await comp.balanceOf(voter)
+            const rewardTokenBalance = ethers.utils.formatEther(_rewardTokenBalance)
+            console.log('=== rewardTokenBalance of voter (after reward tokens are distributed) ===', rewardTokenBalance)
+            //expect(rewardTokenBalance).to.equal("10000.0")  /// 10,000 COMP
+        })
+
     })
 
 })
