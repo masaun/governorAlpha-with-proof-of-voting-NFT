@@ -1,14 +1,14 @@
 # 【GovernorAlpha with Proof of Voting NFT】
 ## 【Introduction of the GovernorAlpha with Proof of Voting NFT】
-- Current disadvantage of on-chain voting (especially for small share holders) is that:
-  - Token holders need to pay GasFee⛽️ for every voting.
-  - Small share holder has less voting power than large share holders.
+- This is the smart contract that incentivize voters (of compound) by using the proof of voting NFTs. 
+  - Once a token holder execute voting, that token holder receive a NFT as a proof of voting.
+  - As a incentive for engagement of voting, token holders who has voting NFTs can get rewards regularly.
 
 <br>
 
-- This is the smart contract that is combination of Voting and NFT.
-  - Once a token holder execute voting, that token holder receive a NFT as a proof of voting.
-  - As a incentive for engagement of voting, token holders who has voting NFTs can get rewards regularly.
+- This smart contract try to solve current disadvantage of on-chain voting (especially for small share holders) is that:
+  - Token holders need to pay GasFee⛽️ for every voting.
+  - Small share holder has less voting power than large share holders.
 
 <br>
 
@@ -61,6 +61,16 @@ npm run compile
 ```
 npm run test:Scenario.test.js
 ```
+
+<br>
+
+&nbsp;
+
+***
+
+## 【Demo】
+- Demo video of unit test  
+  https://~~~
 
 <br>
 
