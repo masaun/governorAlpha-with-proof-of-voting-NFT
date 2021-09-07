@@ -8,7 +8,7 @@
 
 - This smart contract try to solve current disadvantage of on-chain voting that:
   - Token holders (of COMP) need to pay GasFee⛽️ for every voting. (In case token holders vote by themself)
-  - Small share holders (of COMP) has less voting power than large share holders.
+  - Small share holders (of COMP) has less voting power than large share holders.  
     ↓
     - By distributing rewards via this smart contract like above, all token holders (of COMP) can get benefit to engage in voting even if they are small share holders (of COMP).
 
