@@ -1,14 +1,14 @@
 # 【GovernorAlpha with Proof of Voting NFT】
 ## 【Introduction of the GovernorAlpha with Proof of Voting NFT】
 - This is the smart contract that incentivize voters (of compound) by using the proof of voting NFTs. 
-  - Once a token holder execute voting, that token holder receive a NFT as a proof of voting.
-  - As a incentive for engagement of voting, token holders who has voting NFTs can get rewards regularly.
+  - Once a token holder (of COMP) execute voting, that token holder receive a NFT as a proof of voting.
+  - As a incentive to keep engaging in voting, token holders who has voting NFTs can receive rewards regularly.
 
 <br>
 
-- This smart contract try to solve current disadvantage of on-chain voting (especially for small share holders) is that:
-  - Token holders need to pay GasFee⛽️ for every voting.
-  - Small share holder has less voting power than large share holders.
+- This smart contract try to solve current disadvantage of on-chain voting that:
+  - Token holders need to pay GasFee⛽️ for every voting. (In case token holders vote by themself)
+  - Small share holders has less voting power than large share holders.
 
 <br>
 
@@ -17,8 +17,23 @@
 ***
 
 ## 【Workflow】
+- Workflow
+  - ① 
+  - ②
+  - ③
+  - ④
+  - ⑤
+  - ⑥
+  - ⑦
+  - ⑧
+
+<br>
+
+- The `GovernorAlphaWithProofOfVotingNFT.sol` inherit the `GovernorAlpha.sol of Compound` .
+  https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/GovernorAlphaWithProofOfVotingNFT.sol
+
 - Diagram of workflow: 
-  ![【Diagram】GovernorAlpha with Proof of Voting NFT](https://user-images.githubusercontent.com/19357502/132271835-bae0f317-533b-40e9-9f7c-9613069066b9.jpg)
+  ![【Decentralized Governance Hack🌍Compound】GovernorAlpha with Proof of Voting NFT](https://user-images.githubusercontent.com/19357502/132422614-0ea3a4f5-9782-4a1b-937f-a276322e5413.jpg)
 
 &nbsp;
 
