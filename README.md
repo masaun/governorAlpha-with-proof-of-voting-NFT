@@ -10,7 +10,7 @@
   - Token holders (of COMP) need to pay GasFee⛽️ for every voting. (In case token holders vote by themself)
   - Small share holders (of COMP) has less voting power than large share holders.
     ↓
-    - By distributing rewards like above, all token holders (of COMP) can get incentive even if they are small share holders (of COMP).
+    - By distributing rewards via this smart contract like above, all token holders (of COMP) can get benefit to engage in voting even if they are small share holders (of COMP).
 
 <br>
 
