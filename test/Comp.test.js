@@ -36,7 +36,7 @@ describe("Comp", function() {
         //let txReceipt1 = await comp.approve(dst, rawAmount).connect(deployer)
         //let txReceipt2 = await comp.transfer(dst, rawAmount).connect(deployer)
         let txReceipt2 = await comp.transfer(dst, rawAmount)
-        console.log('=== txReceipt of comp.transfer() ===', txReceipt2)
+        //console.log('=== txReceipt of comp.transfer() ===', txReceipt2)
     })
 
 })

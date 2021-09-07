@@ -105,7 +105,7 @@ describe("Scenario test", function() {
         it("Comp balance of voter1 should be 400001 COMP", async function() {
             let _compBalance = await comp.balanceOf(voter1)
             let compBalance = ethers.utils.formatEther(String(_compBalance))
-            console.log('=== Comp balance of deployer ===',  compBalance) // fromETH
+            console.log('=== Comp balance of voter1 ===',  compBalance) // fromETH
             expect(compBalance).to.equal("400001.0")  /// 400,001 COMP
         })
 
@@ -207,11 +207,11 @@ describe("Scenario test", function() {
             rewardTokenBalanceAfter = ethers.utils.formatEther(_rewardTokenBalanceAfter)
             console.log('=== rewardTokenBalance of voter (after reward tokens are distributed) ===', rewardTokenBalanceAfter)
 
-            let _currentDistributionAmount = await rewardsVault.getDistributionAmount()
-            let currentDistributionAmount = ethers.utils.formatEther(_currentDistributionAmount)
-            console.log('=== currentDistributionAmount ===', currentDistributionAmount)
+            let _currentRewardDistributionAmount = await rewardsVault.getDistributionAmount()
+            let currentRewardDistributionAmount = ethers.utils.formatEther(_currentRewardDistributionAmount)
+            console.log('=== currentRewardDistributionAmount ===', currentRewardDistributionAmount)
 
-            expect(rewardTokenBalanceAfter).to.equal(String(Number(rewardTokenBalanceBefore) + Number(currentDistributionAmount) * Number(countOfProofOfVotingNFTs)))
+            expect(rewardTokenBalanceAfter).to.equal(String(Number(rewardTokenBalanceBefore) + Number(currentRewardDistributionAmount) * Number(countOfProofOfVotingNFTs)))
         })
 
     })
