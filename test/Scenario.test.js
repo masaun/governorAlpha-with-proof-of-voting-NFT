@@ -38,9 +38,22 @@ describe("Scenario test", function() {
     describe("Deploy smart contracts", function() {
         it("Assign accounts", async function() {
             accounts = await hre.ethers.getSigners()
+
+            /// Signers of each wallet addresses
+            guardianSig = accounts[0]
+            deployerSig = accounts[0]
+            proposerSig = accounts[0]
+            //proposerSig = accounts[1]
+            voter1Sig = accounts[2]
+            voter2Sig = accounts[3]
+
+            /// Wallet addresses
             guardian = accounts[0].address
             deployer = accounts[0].address
-            voter1 = accounts[1].address
+            proposer = accounts[0].address
+            //proposer = accounts[1].address
+            voter1 = accounts[2].address
+            voter2 = accounts[3].address
         })
 
         it("Deploy the Timelock.sol", async function() {
@@ -110,15 +123,19 @@ describe("Scenario test", function() {
         })
 
         it("Create a new proposal (by using the propose method)", async function() {
-            const targets = [deployer]
-            //const values = ["0"]
+            const targets = [proposer]
+            //const targets = [deployer]
             const values = ["400001"]  // Proposal should be created by voter who has more than 400,001 Comp = 24.9% of Comp (totalSupply of Comp is 10 million Comp / 400,001 Comp)
+            //const values = ["0"]
             const signatures = ["getBalanceOf(address)"]
-            const calldatas = [encodeParameters(['address'], [deployer])]
+            const calldatas = [encodeParameters(['address'], [proposer])]
+            //const calldatas = [encodeParameters(['address'], [deployer])]
             const description = "This is a test proposal."
 
-            let txReceipt1 = await comp.delegate(deployer)
-            let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
+            let txReceipt1 = await comp.connect(proposerSig).delegate(proposer)
+            //let txReceipt1 = await comp.delegate(deployer)
+            let txReceipt2 = await governorAlpha.connect(proposerSig).propose(targets, values, signatures, calldatas, description)
+            //let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
             //console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
 
             /// [Todo]: Get event log (<- Need to use a contract instance created via Hardhat. Not via Truffle)
