@@ -1,5 +1,5 @@
-# 【Compound Governance Voting with NFT】
-## 【Introduction of the Compound Governance Voting with NFT】
+# 【GovernorAlpha with Proof of Voting NFT】
+## 【Introduction of the GovernorAlpha with Proof of Voting NFT】
 - This is the smart contract that is combination of Voting and NFT.
   - Once a token holder execute voting, he/she receive a NFT as a proof of voting.
 
@@ -17,6 +17,7 @@
 
 ## 【Workflow】
 - Diagram of workflow: 
+  ![【Diagram】GovernorAlpha with Proof of Voting NFT](https://user-images.githubusercontent.com/19357502/132271835-bae0f317-533b-40e9-9f7c-9613069066b9.jpg)
 
 &nbsp;
 
