@@ -19,11 +19,11 @@
 ## 【Workflow】
 - Workflow
   - ① Create a proposal (from voters to the GovernorAlphaWithProofOfVotingNFT contract).
-  - ② Create a proposal (from the GovernorAlphaWithProofOfVotingNFT contract to the GovernorAlpha contract).
-    (=> Workflow of ① and ② are execute via the GovernorAlphaWithProofOfVotingNFT contract in a single transaction.)
+  - ② Create a proposal (from the GovernorAlphaWithProofOfVotingNFT contract to the GovernorAlpha contract).  
+    => Workflow of ① and ② above are execute via the GovernorAlphaWithProofOfVotingNFT contract in a single transaction.  
   - ③ Cast a vote (from voters to the GovernorAlphaWithProofOfVotingNFT contract).
   - ④ Cast a vote (from the GovernorAlphaWithProofOfVotingNFT contract to the GovernorAlpha contract).
-    (=> Workflow of ③ and ④ are execute via the GovernorAlphaWithProofOfVotingNFT contract in a single transaction.)
+    => Workflow of ③ and ④ above are execute via the GovernorAlphaWithProofOfVotingNFT contract in a single transaction.  
   - ⑤ Create a new `proof of voting NFT` .
   - ⑥ Mint a proof of voting NFT.
   - ⑦ Transfer a proof of voting NFT to voter who is voted.
