@@ -43,7 +43,7 @@ describe("Scenario test", function() {
             guardianSig = accounts[0]
             deployerSig = accounts[0]
             proposerSig = accounts[0]
-            //proposerSig = accounts[1]
+            proposer2Sig = accounts[1]
             voter1Sig = accounts[2]
             voter2Sig = accounts[3]
 
@@ -51,7 +51,7 @@ describe("Scenario test", function() {
             guardian = accounts[0].address
             deployer = accounts[0].address
             proposer = accounts[0].address
-            //proposer = accounts[1].address
+            proposer2 = accounts[1].address
             voter1 = accounts[2].address
             voter2 = accounts[3].address
         })
@@ -122,28 +122,22 @@ describe("Scenario test", function() {
             expect(compBalance).to.equal("1000.0")  /// 1,000 COMP
         })
 
-        it("Create a new proposal (by using the propose method)", async function() {
+        it("Create a new proposal (This is the 1st proposal)", async function() {
             const targets = [proposer]
-            //const targets = [deployer]
             const values = ["0"]
             const signatures = ["getBalanceOf(address)"]
             const calldatas = [encodeParameters(['address'], [proposer])]
-            //const calldatas = [encodeParameters(['address'], [deployer])]
             const description = "This is a test proposal."
 
             let txReceipt1 = await comp.connect(proposerSig).delegate(proposer)
-            //let txReceipt1 = await comp.delegate(deployer)
             let txReceipt2 = await governorAlpha.connect(proposerSig).propose(targets, values, signatures, calldatas, description)
-            //let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
-            //console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
-
+     
             /// [Todo]: Get event log (<- Need to use a contract instance created via Hardhat. Not via Truffle)
             //let proposalId = await getEvents(governorAlpha, "ProposalCreated")
             //console.log('=== proposalId created ===', proposalId)
         })
 
         it("Cast voting (for proposalId=1) and distribute NFTs into voter's wallet", async function() {
-            /// [Problem]: Returned-value is empty
             //let latestBlock = await time.latestBlock()
             let latestBlock = await getLatestBlock()
             console.log('=== latestBlock (before advanceBlock) ===', String(latestBlock))
@@ -156,13 +150,12 @@ describe("Scenario test", function() {
             const support = false
             
             let txReceipt = await governorAlpha.connect(voter1Sig).castVoteWithProofOfVotingNFT(proposalId, support)
-            //let txReceipt = await governorAlpha.castVoteWithProofOfVotingNFT(proposalId, support)
-            //let txReceipt = await governorAlpha.castVote(proposalId, support)
+            //let txReceipt = await governorAlpha.connect(voter1Sig).castVote(proposalId, support)
         })
 
         it("Check the status of proposalId=1", async function() {
             const proposalId = 1
-            const voter = deployer
+            const voter = voter1
 
             let receiptOfProposal = await governorAlpha.getReceipt(proposalId, voter)
             console.log('=== Receipt of proposal (proposalId=1) ===', receiptOfProposal)
@@ -170,7 +163,6 @@ describe("Scenario test", function() {
             let statusOfProposal = await governorAlpha.state(proposalId)
             console.log('=== Status of proposal (proposalId=1) ===', statusOfProposal)
         })
-
     })
 
 
