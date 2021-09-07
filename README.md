@@ -1,13 +1,14 @@
 # 【GovernorAlpha with Proof of Voting NFT】
 ## 【Introduction of the GovernorAlpha with Proof of Voting NFT】
+- Current disadvantage of on-chain voting (especially for small share holders) is that:
+  - Token holders need to pay GasFee⛽️ for every voting.
+  - Small share holder has less voting power than large share holders.
+
+<br>
+
 - This is the smart contract that is combination of Voting and NFT.
-  - Once a token holder execute voting, he/she receive a NFT as a proof of voting.
-
+  - Once a token holder execute voting, that token holder receive a NFT as a proof of voting.
   - As a incentive for engagement of voting, token holders who has voting NFTs can get rewards regularly.
-
-  - Current disadvantage of on-chain voting (especially for small share holders) is that:
-    - token holders need to pay GasFee⛽️ for every voting.
-    - small share holder has less voting power than large share holders.
 
 <br>
 
@@ -61,18 +62,24 @@ npm run compile
 npm run test:Scenario.test.js
 ```
 
-- Test of Comp.sol
-```
-npm run test:Comp.test.js
-```
-
 <br>
+
+&nbsp;
+
+***
 
 ## 【References】
-- Compound
-  - 
+- [Compound.finance]
+  - compound-protocol/contracts/Governance: https://github.com/compound-finance/compound-protocol/tree/master/contracts/Governance
+  - compound-protocol/tests/Governance: https://github.com/compound-finance/compound-protocol/tree/master/tests/Governance
 
 <br>
 
-- Tally
+- [Tally]
   - Tutorial-Deploy-Governance: https://github.com/withtally/Tutorial-Deploy-Governance
+
+<br>
+
+- [Prize]: 
+  - Most Innovative Use Of Compound's Governance Contracts  
+    https://gitcoin.co/issue/compoundgrants/hackathon/1/100026405
