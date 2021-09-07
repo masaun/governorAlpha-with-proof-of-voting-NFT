@@ -86,7 +86,7 @@ describe("Scenario test", function() {
             REWARDS_VAULT = rewardsVault.address
         })
 
-        it("Deploy the GovernorAlpha.sol", async function() {
+        it("Deploy the GovernorAlphaWithProofOfVotingNFT.sol (which inherit the GovernorAlpha.sol)", async function() {
             GovernorAlpha = await ethers.getContractFactory("GovernorAlphaWithProofOfVotingNFT")
             //GovernorAlpha = await ethers.getContractFactory("contracts/compound/Governance/GovernorAlpha.sol:GovernorAlpha")
             governorAlpha = await GovernorAlpha.deploy(TIMELOCK, COMP, guardian, PROOF_OF_VOTING_NFT_FACTORY)
