@@ -18,22 +18,37 @@
 
 ## 【Workflow】
 - Workflow
-  - ① 
-  - ②
-  - ③
-  - ④
-  - ⑤
-  - ⑥
-  - ⑦
-  - ⑧
+  - ① Create a proposal (from voters to the GovernorAlphaWithProofOfVotingNFT contract).
+  - ② Create a proposal (from the GovernorAlphaWithProofOfVotingNFT contract to the GovernorAlpha contract).
+    (=> Workflow of ① and ② are execute via the GovernorAlphaWithProofOfVotingNFT contract in a single transaction.)
+  - ③ Cast a vote (from voters to the GovernorAlphaWithProofOfVotingNFT contract).
+  - ④ Cast a vote (from the GovernorAlphaWithProofOfVotingNFT contract to the GovernorAlpha contract).
+    (=> Workflow of ③ and ④ are execute via the GovernorAlphaWithProofOfVotingNFT contract in a single transaction.)
+  - ⑤ Create a new `proof of voting NFT` .
+  - ⑥ Mint a proof of voting NFT.
+  - ⑦ Transfer a proof of voting NFT to voter who is voted.
+  - ⑧ Distribute reward tokens (COMP) `based on number of a proof of voting NFTs` .
+    - On the assumption that, 1 proof of voting NFT is given to voter per 1 vote . 
+    - On the assumption that, default `reward distribution amount` is `0.01` COMP.
+      https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/RewardsVault.sol#L20
+      (※ the reward distribution amount can be changed by using `changeDistributionAmount` method in the RewardsVault.sol: https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/RewardsVault.sol#L30-L32 )
+
+    - e.g). If some voter vote 2 different proposal, that voter receive 2 proof of voting NFTs.
+      => In case of that, that voter receive `0.02 COMP (=0.01 * 2 NFTs)` regulary.
+
+    - Remarks). 
+      - At the moment, the `manual` distribution method has been implemented already. ( https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/RewardsVault.sol#L44-L52 )
+      - But, the `reqular` distribution method has not been implemented yet.
+
+<br>
+
+- Diagram of workflow: 
+  ![【Decentralized Governance Hack🌍Compound】GovernorAlpha with Proof of Voting NFT](https://user-images.githubusercontent.com/19357502/132422614-0ea3a4f5-9782-4a1b-937f-a276322e5413.jpg)
 
 <br>
 
 - The `GovernorAlphaWithProofOfVotingNFT.sol` inherit the `GovernorAlpha.sol of Compound` .
   https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/GovernorAlphaWithProofOfVotingNFT.sol
-
-- Diagram of workflow: 
-  ![【Decentralized Governance Hack🌍Compound】GovernorAlpha with Proof of Voting NFT](https://user-images.githubusercontent.com/19357502/132422614-0ea3a4f5-9782-4a1b-937f-a276322e5413.jpg)
 
 &nbsp;
 
