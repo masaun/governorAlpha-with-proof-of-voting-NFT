@@ -86,7 +86,7 @@ describe("Scenario test", function() {
             REWARDS_VAULT = rewardsVault.address
         })
 
-        it("Deploy the GovernorAlphaWithProofOfVotingNFT.sol (which inherit the GovernorAlpha.sol)", async function() {
+        it("Deploy the GovernorAlphaWithProofOfVotingNFT.sol (which inherit the GovernorAlpha.sol)\n", async function() {
             GovernorAlpha = await ethers.getContractFactory("GovernorAlphaWithProofOfVotingNFT")
             //GovernorAlpha = await ethers.getContractFactory("contracts/compound/Governance/GovernorAlpha.sol:GovernorAlpha")
             governorAlpha = await GovernorAlpha.deploy(TIMELOCK, COMP, guardian, PROOF_OF_VOTING_NFT_FACTORY)
@@ -95,14 +95,14 @@ describe("Scenario test", function() {
     })
 
     describe("Check status before scenario test is started", function() {
-        it("Should return the Comp balance", async function() {
+        it("Should return the Comp balance of deployer", async function() {
             let _compBalance = await comp.balanceOf(deployer)
             let compBalance = ethers.utils.formatEther(String(_compBalance))
             console.log('=== Comp balance of deployer ===',  compBalance) // fromETH
             expect(compBalance).to.equal("10000000.0")  /// 10,000,000 COMP
         })
 
-        it("Should return the Comp balance", async function() {
+        it("Should return the Comp balance of voter1\n", async function() {
             const dst = voter1
             const rawAmount = ethers.utils.parseEther('1000')  /// 1000 COMP
             let txReceipt = await comp.transfer(dst, rawAmount)
@@ -153,7 +153,7 @@ describe("Scenario test", function() {
             //let txReceipt = await governorAlpha.connect(voter1Sig).castVote(proposalId, support)
         })
 
-        it("Check the status of proposalId=1", async function() {
+        it("Check the status of proposalId=1 \n", async function() {
             const proposalId = 1
             const voter = voter1
 
@@ -191,11 +191,10 @@ describe("Scenario test", function() {
 
         it("Before rewards (COMP Tokens) is distributed, the reward tokens (COMP Tokens) balance of voter1 should be 1000 COMP", async function() {
             const voter = voter1
-            //const voter = deployer
             let _rewardTokenBalanceBefore = await comp.balanceOf(voter)
             rewardTokenBalanceBefore = ethers.utils.formatEther(_rewardTokenBalanceBefore)
-            console.log('=== rewardTokenBalance of voter (before reward tokens are distributed) ===', rewardTokenBalanceBefore)
-            //expect(rewardTokenBalance).to.equal("0.0")  /// 0 COMP
+            console.log('=== rewardTokenBalance of voter1(before reward tokens are distributed) ===', rewardTokenBalanceBefore)
+            expect(rewardTokenBalanceBefore).to.equal("1000.0")  /// 1000 COMP
         })
 
         it("Number of NFTs that voter has should be 1", async function() {
@@ -203,7 +202,6 @@ describe("Scenario test", function() {
             console.log('=== latestProofOfVotingNFTAddress ===', latestProofOfVotingNFTAddress)
 
             const voter = voter1
-            //const voter = deployer
             let _countOfProofOfVotingNFTs = await proofOfVotingNFTFactory.getCountOfProofOfVotingNFTs(voter)
             countOfProofOfVotingNFTs = String(_countOfProofOfVotingNFTs)
             console.log('=== countOfProofOfVotingNFTs ===', countOfProofOfVotingNFTs)
@@ -211,16 +209,14 @@ describe("Scenario test", function() {
 
         it("Distribute rewards (COMP Tokens) into voters (wallets) depends on number of NFTs that each voters has", async function() {
             const voter = voter1
-            //const voter = deployer
             let txReceipt2 = rewardsVault.distributeRewardToken(voter)
         })
 
-        it("After rewards (COMP Tokens) was distributed, the reward tokens (COMP Tokens) balance of voter (deployer) should be 1000.01 COMP", async function() {
+        it("After rewards (COMP Tokens) was distributed, the reward tokens (COMP Tokens) balance of voter1 should be 1000.01 COMP", async function() {
             const voter = voter1
-            //const voter = deployer
             let _rewardTokenBalanceAfter = await comp.balanceOf(voter)
             rewardTokenBalanceAfter = ethers.utils.formatEther(_rewardTokenBalanceAfter)
-            console.log('=== rewardTokenBalance of voter (after reward tokens are distributed) ===', rewardTokenBalanceAfter)
+            console.log('=== rewardTokenBalance of voter1 (after reward tokens are distributed) ===', rewardTokenBalanceAfter)
 
             let _currentRewardDistributionAmount = await rewardsVault.getDistributionAmount()
             let currentRewardDistributionAmount = ethers.utils.formatEther(_currentRewardDistributionAmount)
