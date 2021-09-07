@@ -92,8 +92,8 @@ describe("Scenario test", function() {
         it("Should return the Comp balance", async function() {
             const dst = voter1
             const rawAmount = ethers.utils.parseEther('400001')  /// 400001 COMP
-            let txReceipt2 = await comp.transfer(dst, rawAmount)
-            //console.log('=== txReceipt of comp.transfer() ===', txReceipt2)
+            let txReceipt = await comp.transfer(dst, rawAmount)
+            //console.log('=== txReceipt of comp.transfer() ===', txReceipt)
         })
     })
 
@@ -119,7 +119,7 @@ describe("Scenario test", function() {
 
             let txReceipt1 = await comp.delegate(deployer)
             let txReceipt2 = await governorAlpha.propose(targets, values, signatures, calldatas, description)
-            console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
+            //console.log('=== txReceipt2 which is governorAlpha.propose() ===',  txReceipt2)            
 
             /// [Todo]: Get event log (<- Need to use a contract instance created via Hardhat. Not via Truffle)
             //let proposalId = await getEvents(governorAlpha, "ProposalCreated")
