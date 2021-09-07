@@ -21,8 +21,8 @@
   - ① Create a proposal (from voters to the GovernorAlphaWithProofOfVotingNFT contract).
   - ② Create a proposal (from the GovernorAlphaWithProofOfVotingNFT contract to the GovernorAlpha contract).  
     => Workflow of ① and ② above are execute via the GovernorAlphaWithProofOfVotingNFT contract in a single transaction.  
-  - ③ Cast a vote (from voters to the GovernorAlphaWithProofOfVotingNFT contract).
-  - ④ Cast a vote (from the GovernorAlphaWithProofOfVotingNFT contract to the GovernorAlpha contract).
+  - ③ Cast a vote (from voters to the GovernorAlphaWithProofOfVotingNFT contract).  
+  - ④ Cast a vote (from the GovernorAlphaWithProofOfVotingNFT contract to the GovernorAlpha contract).  
     => Workflow of ③ and ④ above are execute via the GovernorAlphaWithProofOfVotingNFT contract in a single transaction.  
   - ⑤ Create a new `proof of voting NFT` .
   - ⑥ Mint a proof of voting NFT.
@@ -33,7 +33,7 @@
       https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/RewardsVault.sol#L20
       (※ the reward distribution amount can be changed by using `changeDistributionAmount` method in the RewardsVault.sol: https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/RewardsVault.sol#L30-L32 )
 
-    - e.g). If some voter vote 2 different proposal, that voter receive 2 proof of voting NFTs.
+    - e.g). If some voter vote 2 different proposal, that voter receive 2 proof of voting NFTs.  
       => In case of that, that voter receive `0.02 COMP (=0.01 * 2 NFTs)` regulary.
 
     - Remarks). 
