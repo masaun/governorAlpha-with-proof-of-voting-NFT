@@ -14,7 +14,7 @@
 
 <br>
 
-- This smart contracts include the customized-smart contracts of the `GovernorAlpha.sol of Compound.  
+- This smart contracts include the customized-smart contracts of the `GovernorAlpha.sol` of Compound.  
   - e.g). The `GovernorAlphaWithProofOfVotingNFT.sol` inherit the `GovernorAlpha.sol of Compound` .  
     https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/GovernorAlphaWithProofOfVotingNFT.sol  
 
