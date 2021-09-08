@@ -14,6 +14,12 @@
 
 <br>
 
+- This smart contracts include the customized-smart contracts of the `GovernorAlpha.sol` of Compound.  
+  - e.g). The `GovernorAlphaWithProofOfVotingNFT.sol` inherit the `GovernorAlpha.sol of Compound` .  
+    https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/GovernorAlphaWithProofOfVotingNFT.sol  
+
+<br>
+
 &nbsp;
 
 ***
@@ -46,11 +52,6 @@
 
 - Diagram of workflow: 
   ![【Decentralized Governance Hack🌍Compound】GovernorAlpha with Proof of Voting NFT](https://user-images.githubusercontent.com/19357502/132422614-0ea3a4f5-9782-4a1b-937f-a276322e5413.jpg)
-
-<br>
-
-- The `GovernorAlphaWithProofOfVotingNFT.sol` inherit the `GovernorAlpha.sol of Compound` .
-  https://github.com/masaun/governorAlpha-with-proof-of-voting-NFT/blob/main/contracts/GovernorAlphaWithProofOfVotingNFT.sol
 
 &nbsp;
 
